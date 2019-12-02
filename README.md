@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/SKTDK/saving-jim-front.svg?branch=master)](https://travis-ci.com/SKTDK/saving-jim-front)
+
 # pfefront
 
 A new Flutter project.
