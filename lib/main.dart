@@ -58,19 +58,19 @@ class _AppState extends State<App> {
 // if user has a token -> Dashboard
 // if user has no token -> login
     if (token != null) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ManagerDashboard(),
-        ),
-      );
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ManagerDashboard(),
+          ),
+          (r) => false);
     } else {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => LoginPage(),
-        ),
-      );
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => LoginPage(),
+          ),
+          (r) => false);
     }
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'FormCard.dart';
+import '../../Utils/ThemedApp.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -9,8 +10,9 @@ class LoginPage extends StatelessWidget {
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
     ScreenUtil.instance =
         ScreenUtil(width: 1000, height: 1334, allowFontScaling: true);
-    return SafeArea(
-      child: new Scaffold(
+    return MaterialApp(
+      theme: ThemedApp.getThemeData(),
+      home: new Scaffold(
         resizeToAvoidBottomPadding: true,
         body: Stack(
           fit: StackFit.expand,

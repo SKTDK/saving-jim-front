@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class MenuEntry {
-  MenuEntry(this.title, this.widget, [this.children = const <MenuEntry>[]]);
+  MenuEntry(this.title, this.route, [this.clearNavigation = false]);
 
   final String title;
-  final List<MenuEntry> children;
-  final Widget widget;
+  final MaterialPageRoute route;
+  final bool clearNavigation;
 }

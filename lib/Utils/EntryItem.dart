@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'MenuEntry.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // This is the design of a single Entry item within a DashboardMenu
 class EntryItem extends StatelessWidget {
@@ -11,11 +12,12 @@ class EntryItem extends StatelessWidget {
   Widget _buildTiles(MenuEntry root, BuildContext context) {
     return ListTile(
       onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => entry.widget,
-            ));
+        if (!root.clearNavigation) {
+          Navigator.push(context, root.route);
+        } else {
+          _clearPreferences(context);
+          Navigator.pushAndRemoveUntil(context, root.route, (r) => false);
+        }
       },
       title: Center(
         child: Container(
@@ -36,5 +38,10 @@ class EntryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _buildTiles(entry, context);
+  }
+
+  void _clearPreferences(BuildContext context) async {
+    SharedPreferences sharedpreferences = await SharedPreferences.getInstance();
+    sharedpreferences.clear();
   }
 }

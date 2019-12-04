@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../Utils/MenuEntry.dart';
 import '../../Utils/EntryItem.dart';
-import '../../Utils/Logout.dart';
+import '../Login/LoginPage.dart';
 import 'AddClientPage.dart';
 import 'StartNewGamePage.dart';
 import 'OverviewPage.dart';
@@ -57,10 +57,20 @@ class MenuState extends State<Menu> {
 // We populate the Menu with new Entries (Display name, Widget)
   static List<MenuEntry> _populateEntrySet() {
     List<MenuEntry> e = <MenuEntry>[
-      MenuEntry('Ajouter un client', AddClientPage()),
-      MenuEntry('Lancer une nouvelle partie', StartNewGamePage()),
-      MenuEntry('Vue d\'ensemble', OverviewPage()),
-      MenuEntry('Se déconnecter', Logout()),
+      MenuEntry(
+        'Ajouter un client',
+        MaterialPageRoute(builder: (context) => AddClientPage()),
+      ),
+      MenuEntry(
+        'Lancer une nouvelle partie',
+        MaterialPageRoute(builder: (context) => StartNewGamePage()),
+      ),
+      MenuEntry(
+        'Vue d\'ensemble',
+        MaterialPageRoute(builder: (context) => OverviewPage()),
+      ),
+      MenuEntry('Se déconnecter',
+          MaterialPageRoute(builder: (context) => LoginPage()), true),
     ];
     return e;
   }
