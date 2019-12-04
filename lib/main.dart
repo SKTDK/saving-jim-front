@@ -1,43 +1,76 @@
 /* Authors: Gauthier Grandhenry Cyril HENNEN Marcin Krasowski */
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'Widgets/ManagerDashboard/ManagerDashboard.dart';
+import 'Utils/ThemedApp.dart';
 import 'Widgets/Login/LoginPage.dart';
+import 'dart:async';
 
-void main() => runApp(MaterialApp(
-    home: MyApp(),
-    debugShowCheckedModeBanner: false,
-    theme: ThemeData(
-      // Defines the default brightness and colors
-      primaryColor: Colors.orange,
-
-      // Defines the default font family.
-      fontFamily: 'Open Sans',
-
-      // Defines the default TextTheme. Use this to specify the default
-      // text styling for headlines, titles, bodies of text, and more.
-      textTheme: TextTheme(
-          headline: TextStyle(
-              fontSize: 58.0, letterSpacing: .09, fontWeight: FontWeight.bold),
-          title: TextStyle(fontSize: 36.0),
-          caption: TextStyle(color: Colors.grey, fontSize: 12.0),
-          body1: TextStyle(fontSize: 20.0)),
-
-      // Defines the default ButtonThemeData.
-      // ButtonTextTheme.primary = if button dark -> text white. If button bright -> text dark (auto)
-      buttonTheme: ButtonThemeData(
-        shape: RoundedRectangleBorder(),
-        buttonColor: Colors.orange,
-        textTheme: ButtonTextTheme.primary,
+// Starting point
+void main() => runApp(
+      MaterialApp(
+        home: App(),
+        debugShowCheckedModeBanner: false,
+        theme: ThemedApp.getThemeData(),
       ),
-    )));
+    );
 
-class MyApp extends StatefulWidget {
+class App extends StatefulWidget {
   @override
-  _MyAppState createState() => new _MyAppState();
+  _AppState createState() => new _AppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _AppState extends State<App> {
+  var token;
+
+  @override
+  void initState() {
+    super.initState();
+    _startTimer();
+  }
+
+// Splash screen
   @override
   Widget build(BuildContext context) {
-    return LoginPage();
+    return new Scaffold(
+      body: Container(
+        margin: EdgeInsets.all(300),
+        child: new Center(
+          child: new Image.asset('assets/images/logo.png'),
+        ),
+      ),
+    );
+  }
+
+// Splash screen length
+  void _startTimer() {
+    Timer(Duration(seconds: 1), () {
+      _navigateToEntryPoint();
+    });
+  }
+
+// Navigation after timer expires
+  void _navigateToEntryPoint() async {
+    // Retrieves the token from the device
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    token = sharedPreferences.getString('token');
+
+// if user has a token -> Dashboard
+// if user has no token -> login
+    if (token != null) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ManagerDashboard(),
+        ),
+      );
+    } else {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LoginPage(),
+        ),
+      );
+    }
   }
 }

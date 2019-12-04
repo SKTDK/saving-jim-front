@@ -20,6 +20,9 @@ dependencies:
   flutter:
     sdk: flutter
 
+  #NSUserDefaults (on iOS) and SharedPreferences (on Android)
+  shared_preferences: ^0.5.4+6
+
   # add flutter_ScreenUtil
   flutter_screenutil: ^0.5.3
 

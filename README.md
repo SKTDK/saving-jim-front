@@ -1,18 +1,26 @@
 [![Build Status](https://travis-ci.com/SKTDK/saving-jim-front.svg?branch=master)](https://travis-ci.com/SKTDK/saving-jim-front)
 
-# pfefront
+# saving-jim-front
 
-A new Flutter project.
+## How to use
 
-## Getting Started
+### 1. Account creation
 
-This project is a starting point for a Flutter application.
+First you need to create a new user or use an existing one.
+The default one is : username: xd password: xd
+To create a user you can use Postman.
 
-A few resources to get you started if this is your first Flutter project:
+1. Run the latest back-end server
+2. Open postman and make a POST to: localhost:8080/register
+3. Set the header content-type to application/json
+4. Set the body to a JSON document
+   Example:
+   {
+   "username": "test",
+   "password": "test"
+   }
+5. Send your request. it should return the object \_id
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+### 2. Running the app
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+You need to fill in the credentials. Since there is no privilege system yet you will be directly considered as an Admin
