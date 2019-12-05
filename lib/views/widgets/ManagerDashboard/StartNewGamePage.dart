@@ -8,6 +8,7 @@ class StartNewGamePage extends StatefulWidget {
 class _StartNewGamePageState extends State<StartNewGamePage> {
   @override
   Widget build(BuildContext context) {
+    // TODO
     return MaterialApp(
       title: 'Lancer une nouvelle partie',
       home: Scaffold(

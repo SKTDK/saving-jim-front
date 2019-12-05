@@ -1,10 +1,20 @@
 /* Authors: Gauthier Grandhenry Cyril HENNEN Marcin Krasowski */
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'Widgets/ManagerDashboard/ManagerDashboard.dart';
+import 'views/pages/ManagerDashboard.dart';
 import 'Utils/ThemedApp.dart';
-import 'Widgets/Login/LoginPage.dart';
+import 'views/pages/LoginPage.dart';
 import 'dart:async';
+import 'view_models/LoginPageViewModel.dart';
+import 'view_models/ManagerDashboardViewModel.dart';
+import 'services/apiService.dart';
+import 'package:meta/meta.dart';
+
+final LoginPageViewModel loginPageViewModel =
+    LoginPageViewModel(apiSvc: ApiService());
+
+final ManagerDashboardViewModel managerDashboardViewModel =
+    ManagerDashboardViewModel(apiSvc: ApiService());
 
 // Starting point
 void main() => runApp(
@@ -17,11 +27,19 @@ void main() => runApp(
 
 class App extends StatefulWidget {
   @override
-  _AppState createState() => new _AppState();
+  _AppState createState() => new _AppState(
+      loginPageViewModel: loginPageViewModel,
+      managerDashboardViewModel: managerDashboardViewModel);
 }
 
 class _AppState extends State<App> {
   var token;
+  final LoginPageViewModel loginPageViewModel;
+  final ManagerDashboardViewModel managerDashboardViewModel;
+
+  _AppState(
+      {@required this.loginPageViewModel,
+      @required this.managerDashboardViewModel});
 
   @override
   void initState() {
@@ -61,14 +79,15 @@ class _AppState extends State<App> {
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-            builder: (context) => ManagerDashboard(),
+            builder: (context) =>
+                ManagerDashboard(viewModel: managerDashboardViewModel),
           ),
           (r) => false);
     } else {
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-            builder: (context) => LoginPage(),
+            builder: (context) => LoginPage(viewModel: loginPageViewModel),
           ),
           (r) => false);
     }

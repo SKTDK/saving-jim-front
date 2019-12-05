@@ -1,9 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'FormCard.dart';
+import 'package:meta/meta.dart';
+import 'package:scoped_model/scoped_model.dart';
+import '../widgets/login/LoginForm.dart';
 import '../../Utils/ThemedApp.dart';
+import '../../view_models/LoginPageViewModel.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  final LoginPageViewModel viewModel;
+
+  LoginPage({Key key, @required this.viewModel}) : super(key: key);
+
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage>
+    with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     // ScreenUtil to handle Screen Sizes
@@ -43,7 +56,8 @@ class LoginPage extends StatelessWidget {
                     SizedBox(
                       height: ScreenUtil.getInstance().setHeight(180),
                     ),
-                    FormCard(),
+                    ScopedModel<LoginPageViewModel>(
+                        model: widget.viewModel, child: LoginForm()),
                   ],
                 ),
               ),

@@ -8,8 +8,8 @@ class AddClientPage extends StatefulWidget {
 class _AddClientPageState extends State<AddClientPage> {
   @override
   Widget build(BuildContext context) {
+    // TODO
     return MaterialApp(
-      title: 'Ajouter un nouveau client',
       home: Scaffold(
         appBar: AppBar(
           title: Text('Ajouter un nouveau client'),

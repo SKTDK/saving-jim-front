@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'MenuEntry.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../models/MenuEntry.dart';
 
 // This is the design of a single Entry item within a DashboardMenu
 class EntryItem extends StatelessWidget {
@@ -12,12 +12,11 @@ class EntryItem extends StatelessWidget {
   Widget _buildTiles(MenuEntry root, BuildContext context) {
     return ListTile(
       onTap: () {
-        if (!root.clearNavigation) {
+        if (root.clearPreferences) _clearPreferences(context);
+        if (!root.clearNavigation)
           Navigator.push(context, root.route);
-        } else {
-          _clearPreferences(context);
+        else
           Navigator.pushAndRemoveUntil(context, root.route, (r) => false);
-        }
       },
       title: Center(
         child: Container(
