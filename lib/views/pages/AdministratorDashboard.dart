@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:saving_jim/models/MenuEntry.dart';
 import 'package:saving_jim/views/widgets/EntryItem.dart';
-import 'package:saving_jim/view_models/ManagerDashboardViewModel.dart';
+import 'package:saving_jim/view_models/AdministratorDashboardViewModel.dart';
 
-class ManagerDashboard extends StatefulWidget {
-  final ManagerDashboardViewModel viewModel;
-  ManagerDashboard({Key key, @required this.viewModel}) : super(key: key);
+class AdministratorDashboard extends StatefulWidget {
+  final AdministratorDashboardViewModel viewModel;
+  AdministratorDashboard({Key key, @required this.viewModel}) : super(key: key);
 
   @override
-  _ManagerDashboardState createState() => _ManagerDashboardState();
+  _AdministratorDashboardState createState() => _AdministratorDashboardState();
 }
 
-class _ManagerDashboardState extends State<ManagerDashboard> {
+class _AdministratorDashboardState extends State<AdministratorDashboard> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: ScopedModel<ManagerDashboardViewModel>(
+      home: ScopedModel<AdministratorDashboardViewModel>(
           model: widget.viewModel, child: Menu()),
     );
   }
@@ -32,14 +32,14 @@ class MenuState extends State<Menu> {
 
   @override
   Widget build(BuildContext context) {
-    return ScopedModelDescendant<ManagerDashboardViewModel>(
+    return ScopedModelDescendant<AdministratorDashboardViewModel>(
         builder: (context, child, model) {
       _entrySet = model.populateEntrySet();
       return SafeArea(
         child: Scaffold(
           body: _buildMenu(),
           appBar: AppBar(
-            title: Text('Tableau de bord - Accompagnateur'),
+            title: Text('Tableau de bord - Administrateur'),
           ),
         ),
       );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:scoped_model/scoped_model.dart';
-import '../../../view_models/LoginPageViewModel.dart';
+import 'package:saving_jim/view_models/LoginPageViewModel.dart';
 
 class LoginForm extends StatefulWidget {
   @override

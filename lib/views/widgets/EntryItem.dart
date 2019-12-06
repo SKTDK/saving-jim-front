@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../models/MenuEntry.dart';
+import 'package:saving_jim/models/MenuEntry.dart';
 
 // This is the design of a single Entry item within a DashboardMenu
 class EntryItem extends StatelessWidget {

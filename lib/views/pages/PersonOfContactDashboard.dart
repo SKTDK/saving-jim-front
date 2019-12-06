@@ -2,21 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:saving_jim/models/MenuEntry.dart';
 import 'package:saving_jim/views/widgets/EntryItem.dart';
-import 'package:saving_jim/view_models/ManagerDashboardViewModel.dart';
+import 'package:saving_jim/view_models/PersonOfContactDashboardViewModel.dart';
 
-class ManagerDashboard extends StatefulWidget {
-  final ManagerDashboardViewModel viewModel;
-  ManagerDashboard({Key key, @required this.viewModel}) : super(key: key);
+class PersonOfContactDashboard extends StatefulWidget {
+  final PersonOfContactDashboardViewModel viewModel;
+  PersonOfContactDashboard({Key key, @required this.viewModel})
+      : super(key: key);
 
   @override
-  _ManagerDashboardState createState() => _ManagerDashboardState();
+  _PersonOfContactDashboardState createState() =>
+      _PersonOfContactDashboardState();
 }
 
-class _ManagerDashboardState extends State<ManagerDashboard> {
+class _PersonOfContactDashboardState extends State<PersonOfContactDashboard> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: ScopedModel<ManagerDashboardViewModel>(
+      home: ScopedModel<PersonOfContactDashboardViewModel>(
           model: widget.viewModel, child: Menu()),
     );
   }
@@ -32,14 +34,14 @@ class MenuState extends State<Menu> {
 
   @override
   Widget build(BuildContext context) {
-    return ScopedModelDescendant<ManagerDashboardViewModel>(
+    return ScopedModelDescendant<PersonOfContactDashboardViewModel>(
         builder: (context, child, model) {
       _entrySet = model.populateEntrySet();
       return SafeArea(
         child: Scaffold(
           body: _buildMenu(),
           appBar: AppBar(
-            title: Text('Tableau de bord - Accompagnateur'),
+            title: Text('Tableau de bord - Personne de contact'),
           ),
         ),
       );

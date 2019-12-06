@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meta/meta.dart';
 import 'package:scoped_model/scoped_model.dart';
-import '../widgets/login/LoginForm.dart';
-import '../../Utils/ThemedApp.dart';
-import '../../view_models/LoginPageViewModel.dart';
+import 'package:saving_jim/views/widgets/login/LoginForm.dart';
+import 'package:saving_jim/Utils/ThemedApp.dart';
+import 'package:saving_jim/view_models/LoginPageViewModel.dart';
 
 class LoginPage extends StatefulWidget {
   final LoginPageViewModel viewModel;
@@ -50,7 +50,10 @@ class _LoginPageState extends State<LoginPage>
                           height: ScreenUtil.getInstance().setHeight(110),
                         ),
                         Text("ESOPE BD",
-                            style: Theme.of(context).textTheme.headline)
+                            style: TextStyle(
+                                fontSize: 58.0,
+                                letterSpacing: .09,
+                                fontWeight: FontWeight.bold)),
                       ],
                     ),
                     SizedBox(

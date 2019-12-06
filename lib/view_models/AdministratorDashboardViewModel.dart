@@ -12,22 +12,22 @@ import 'package:saving_jim/view_models/LoginPageViewModel.dart';
 final LoginPageViewModel loginPageViewModel =
     LoginPageViewModel(apiSvc: ApiService());
 
-class ManagerDashboardViewModel extends Model {
+class AdministratorDashboardViewModel extends Model {
   final ApiService apiSvc;
-  ManagerDashboardViewModel({@required this.apiSvc});
+  AdministratorDashboardViewModel({@required this.apiSvc});
 // TODO
   List<MenuEntry> populateEntrySet() {
     List<MenuEntry> e = <MenuEntry>[
       MenuEntry(
-        'Créer un compte utilisateur',
+        'Créer un compte accompagnateur',
         MaterialPageRoute(builder: (context) => AddClientPage()),
       ),
       MenuEntry(
-        'Créer une nouvelle partie',
+        'Cloturer un compte',
         MaterialPageRoute(builder: (context) => StartNewGamePage()),
       ),
       MenuEntry(
-        'Comparer des parties',
+        'Modifier un compte',
         MaterialPageRoute(builder: (context) => OverviewPage()),
       ),
       MenuEntry(

@@ -12,9 +12,9 @@ import 'package:saving_jim/view_models/LoginPageViewModel.dart';
 final LoginPageViewModel loginPageViewModel =
     LoginPageViewModel(apiSvc: ApiService());
 
-class ManagerDashboardViewModel extends Model {
+class ChildDashboardViewModel extends Model {
   final ApiService apiSvc;
-  ManagerDashboardViewModel({@required this.apiSvc});
+  ChildDashboardViewModel({@required this.apiSvc});
 // TODO
   List<MenuEntry> populateEntrySet() {
     List<MenuEntry> e = <MenuEntry>[

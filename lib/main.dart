@@ -1,14 +1,17 @@
 /* Authors: Gauthier Grandhenry Cyril HENNEN Marcin Krasowski */
 import 'package:flutter/material.dart';
+import 'package:saving_jim/view_models/NavigationHandler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'views/pages/ManagerDashboard.dart';
+import 'view_models/NavigationHandler.dart';
 import 'Utils/ThemedApp.dart';
 import 'views/pages/LoginPage.dart';
 import 'dart:async';
+import 'dart:convert';
 import 'view_models/LoginPageViewModel.dart';
 import 'view_models/ManagerDashboardViewModel.dart';
-import 'services/apiService.dart';
+import 'services/ApiService.dart';
 import 'package:meta/meta.dart';
+import 'models/User.dart';
 
 final LoginPageViewModel loginPageViewModel =
     LoginPageViewModel(apiSvc: ApiService());
@@ -33,7 +36,6 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  var token;
   final LoginPageViewModel loginPageViewModel;
   final ManagerDashboardViewModel managerDashboardViewModel;
 
@@ -71,18 +73,13 @@ class _AppState extends State<App> {
   void _navigateToEntryPoint() async {
     // Retrieves the token from the device
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    token = sharedPreferences.getString('token');
+    String userString = sharedPreferences.getString('user');
 
-// if user has a token -> Dashboard
-// if user has no token -> login
-    if (token != null) {
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-            builder: (context) =>
-                ManagerDashboard(viewModel: managerDashboardViewModel),
-          ),
-          (r) => false);
+    // if user has a token -> Dashboard
+    // if user has no token -> login
+    if (userString != null) {
+      User user = User.fromJson(jsonDecode(userString));
+      NavigationHandler.handleNavigation(context, user.accountType);
     } else {
       Navigator.pushAndRemoveUntil(
           context,

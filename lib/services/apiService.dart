@@ -1,35 +1,35 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../models/User.dart';
+import 'package:saving_jim/services/IApiService.dart';
+import 'package:saving_jim/models/User.dart';
 
-class ApiService {
+class ApiService implements IApiService {
   Future<User> login(String username, String password) async {
     Map map = {'username': username, 'password': password};
     String remote = _localhost();
-
     String url = remote + ':' + '8080' + "/login";
 
     HttpClient httpClient = new HttpClient();
     HttpClientRequest request = await httpClient.postUrl(Uri.parse(url));
     request.headers.set('content-type', 'application/json');
-    request.add(utf8.encode(json.encode(map)));
-    //log(json.encode(map).toString());
+    request.add(utf8.encode(jsonEncode(map)));
 
     HttpClientResponse response = await request.close();
 
-    // TODO: check response.statusCode
     String reply = await response.transform(utf8.decoder).join();
 
     httpClient.close();
-    final body = json.decode(reply);
+    final body = jsonDecode(reply);
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     if (body['success']) {
-      final String token = body['token'];
-      await sharedPreferences.setString('token', token);
-      return new User(username, password);
+      await sharedPreferences.setString('token', body['token']);
+      await sharedPreferences.setString('user', jsonEncode(body['user']));
+      print(jsonEncode(body['user']));
+      return new User.fromJson(body['user']);
     } else {
       await sharedPreferences.setString('token', null);
+      await sharedPreferences.setString('user', null);
       return null;
     }
   }
