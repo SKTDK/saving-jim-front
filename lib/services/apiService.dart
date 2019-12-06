@@ -3,12 +3,13 @@ import 'dart:io';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:saving_jim/services/IApiService.dart';
 import 'package:saving_jim/models/User.dart';
+import 'package:saving_jim/utils/constants.dart' as constants;
 
 class ApiService implements IApiService {
   Future<User> login(String username, String password) async {
     Map map = {'username': username, 'password': password};
     String remote = _localhost();
-    String url = remote + ':' + '8080' + "/login";
+    String url = remote + ':' + constants.SERVER_PORT.toString() + "/login";
 
     HttpClient httpClient = new HttpClient();
     HttpClientRequest request = await httpClient.postUrl(Uri.parse(url));
@@ -36,9 +37,9 @@ class ApiService implements IApiService {
 
   String _localhost() {
     if (Platform.isAndroid) {
-      return 'http://10.0.2.2';
+      return constants.SERVER_ADDRESS_ANDROID;
     } else {
-      return 'http://localhost';
+      return constants.SERVER_ADDRESS_IOS;
     }
   }
 }

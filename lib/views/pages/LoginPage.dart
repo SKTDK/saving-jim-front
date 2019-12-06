@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meta/meta.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:saving_jim/views/widgets/login/LoginForm.dart';
-import 'package:saving_jim/Utils/ThemedApp.dart';
+import 'package:saving_jim/utils/ThemedApp.dart';
 import 'package:saving_jim/view_models/LoginPageViewModel.dart';
 
 class LoginPage extends StatefulWidget {

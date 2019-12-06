@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:saving_jim/view_models/NavigationHandler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'view_models/NavigationHandler.dart';
-import 'Utils/ThemedApp.dart';
+import 'utils/ThemedApp.dart';
 import 'views/pages/LoginPage.dart';
 import 'dart:async';
 import 'dart:convert';
