@@ -6,6 +6,7 @@ import 'package:saving_jim/models/User.dart';
 import 'package:saving_jim/utils/constants.dart' as constants;
 
 class ApiService implements IApiService {
+  //login
   Future<User> login(String username, String password) async {
     Map map = {'username': username, 'password': password};
     String remote = _localhost();
@@ -32,6 +33,44 @@ class ApiService implements IApiService {
       await sharedPreferences.setString('token', null);
       await sharedPreferences.setString('user', null);
       return null;
+    }
+  }
+
+// add manager
+  Future<bool> addManager(String firstname, String lastname, String username,
+      String password) async {
+    Map map = {
+      'firstname': firstname,
+      'lastname': lastname,
+      'username': username,
+      'password': password
+    };
+    String remote = _localhost();
+    String url = remote +
+        ':' +
+        constants.SERVER_PORT.toString() +
+        "/accounts/addManager";
+
+    HttpClient httpClient = new HttpClient();
+    HttpClientRequest request = await httpClient.postUrl(Uri.parse(url));
+    request.headers.set('content-type', 'application/json');
+    // auth with jwt token
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    request.headers.set('authorization', sharedPreferences.get('token'));
+
+    request.add(utf8.encode(jsonEncode(map)));
+
+    HttpClientResponse response = await request.close();
+
+    String reply = await response.transform(utf8.decoder).join();
+
+    httpClient.close();
+    final body = jsonDecode(reply);
+    if (body['success']) {
+      print('User created!');
+      return true;
+    } else {
+      return false;
     }
   }
 

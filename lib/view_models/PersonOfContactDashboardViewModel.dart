@@ -5,7 +5,7 @@ import 'package:saving_jim/models/MenuEntry.dart';
 import 'package:saving_jim/views/widgets/ManagerDashboard/AddClientPage.dart';
 import 'package:saving_jim/views/widgets/ManagerDashboard/StartNewGamePage.dart';
 import 'package:saving_jim/views/widgets/ManagerDashboard/OverviewPage.dart';
-import 'package:saving_jim/views/pages/LoginPage.dart';
+import 'package:saving_jim/views/pages/Login/LoginPage.dart';
 import 'package:saving_jim/services/ApiService.dart';
 import 'package:saving_jim/view_models/LoginPageViewModel.dart';
 

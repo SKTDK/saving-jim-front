@@ -4,7 +4,7 @@ import 'package:saving_jim/view_models/NavigationHandler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'view_models/NavigationHandler.dart';
 import 'utils/ThemedApp.dart';
-import 'views/pages/LoginPage.dart';
+import 'views/pages/Login/LoginPage.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'view_models/LoginPageViewModel.dart';

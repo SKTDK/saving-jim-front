@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:saving_jim/views/pages/ManagerDashboard.dart';
-import 'package:saving_jim/views/pages/ChildDashboard.dart';
-import 'package:saving_jim/views/pages/PersonOfContactDashboard.dart';
-import 'package:saving_jim/views/pages/AdministratorDashboard.dart';
+import 'package:saving_jim/views/pages/DashboardPages/ManagerDashboard.dart';
+import 'package:saving_jim/views/pages/DashboardPages/ChildDashboard.dart';
+import 'package:saving_jim/views/pages/DashboardPages/PersonOfContactDashboard.dart';
+import 'package:saving_jim/views/pages/DashboardPages/AdministratorDashboard.dart';
 import 'package:saving_jim/view_models/ManagerDashboardViewModel.dart';
 import 'package:saving_jim/view_models/ChildDashboardViewModel.dart';
 import 'package:saving_jim/view_models/PersonOfContactDashboardViewModel.dart';

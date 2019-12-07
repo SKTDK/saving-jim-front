@@ -80,8 +80,7 @@ class _LoginFormState extends State<LoginForm> {
                   children: <Widget>[
                     RaisedButton(
                       onPressed: () {
-                        _login(context, model, usernameController.text,
-                            passwordController.text);
+                        _login(context, model);
                       },
                       child: Text('Connexion',
                           style: Theme.of(context).textTheme.body1),
@@ -96,8 +95,7 @@ class _LoginFormState extends State<LoginForm> {
     });
   }
 
-  void _login(BuildContext context, LoginPageViewModel model, String username,
-      String password) {
+  void _login(BuildContext context, LoginPageViewModel model) {
     model.setUser(context, usernameController.text, passwordController.text);
   }
 }
