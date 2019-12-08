@@ -27,7 +27,7 @@ class _LoginFormState extends State<LoginForm> {
         builder: (context, child, model) {
       return new Container(
         width: double.infinity,
-        height: ScreenUtil.getInstance().setHeight(displayMode ? 400 : 500),
+        height: ScreenUtil.getInstance().setHeight(displayMode ? 500 : 600),
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(8.0),

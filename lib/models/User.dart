@@ -69,6 +69,10 @@ class User {
     return this._active;
   }
 
+  set active(bool val) {
+    this._active = val;
+  }
+
   String get modifiedOn {
     return this._modifiedOn;
   }

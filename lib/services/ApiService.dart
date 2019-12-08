@@ -27,7 +27,7 @@ class ApiService implements IApiService {
     if (body['success']) {
       await sharedPreferences.setString('token', body['token']);
       await sharedPreferences.setString('user', jsonEncode(body['user']));
-      print(jsonEncode(body['user']));
+      print(body.toString());
       return new User.fromJson(body['user']);
     } else {
       await sharedPreferences.setString('token', null);
@@ -68,6 +68,78 @@ class ApiService implements IApiService {
     final body = jsonDecode(reply);
     if (body['success']) {
       print('User created!');
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+// user
+  Future<List<User>> fetchUsers(int accountType) async {
+    Map map = {'accountType': accountType};
+    String remote = _localhost();
+    String url = remote +
+        ':' +
+        constants.SERVER_PORT.toString() +
+        "/accounts/usersByAccountType";
+
+    HttpClient httpClient = new HttpClient();
+    HttpClientRequest request = await httpClient.postUrl(Uri.parse(url));
+    request.headers.set('content-type', 'application/json; charset=utf-8');
+    // auth with jwt token
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    request.headers.set('authorization', sharedPreferences.get('token'));
+
+    request.add(utf8.encode(jsonEncode(map)));
+
+    HttpClientResponse response = await request.close();
+
+    String reply = await response.transform(utf8.decoder).join();
+    // print(reply);
+    httpClient.close();
+    final body = json.decode(reply);
+    if (body != null) {
+      //print('Users fetched!');
+      print(body.toString());
+      Iterable i = body;
+      List<User> myThing =
+          (jsonDecode(reply) as List).map((e) => new User.fromJson(e)).toList();
+      List<User> users = List<User>();
+      i.forEach((res) {
+        users.add(new User.fromJson(res));
+      });
+      return myThing;
+    } else {
+      return null;
+    }
+  }
+
+// change account state
+  Future<bool> changeAccountState(User user) async {
+    Map map = {'username': user.username, 'active': !user.active};
+    String remote = _localhost();
+    String url = remote +
+        ':' +
+        constants.SERVER_PORT.toString() +
+        "/accounts/changeAccountState";
+
+    HttpClient httpClient = new HttpClient();
+    HttpClientRequest request = await httpClient.postUrl(Uri.parse(url));
+    request.headers.set('content-type', 'application/json');
+    // auth with jwt token
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    request.headers.set('authorization', sharedPreferences.get('token'));
+
+    request.add(utf8.encode(jsonEncode(map)));
+
+    HttpClientResponse response = await request.close();
+
+    String reply = await response.transform(utf8.decoder).join();
+
+    httpClient.close();
+    final body = jsonDecode(reply);
+    if (body['success']) {
+      print('Done');
       return true;
     } else {
       return false;

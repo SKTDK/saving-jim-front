@@ -32,6 +32,9 @@ class _AddManagerPageState extends State<AddManagerPage>
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
+    ScreenUtil.instance =
+        ScreenUtil(width: 1000, height: 1334, allowFontScaling: true);
     return new MaterialApp(
       theme: ThemedApp.getThemeData(),
       home: new Scaffold(
@@ -55,86 +58,81 @@ class _AddManagerPageState extends State<AddManagerPage>
                       offset: Offset(0.0, -10.0),
                       blurRadius: 10.0),
                 ]),
-            child: Padding(
-              padding: EdgeInsets.only(
-                  left: 16.0, right: 16.0, top: 16.0, bottom: 16.0),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Text("Prenom", style: Theme.of(context).textTheme.body1),
-                    TextField(
-                      textAlign: TextAlign.center,
-                      controller: firstnameController,
-                      decoration: InputDecoration(
-                          hintText: "John",
-                          hintStyle: Theme.of(context).textTheme.caption),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text("Prenom", style: Theme.of(context).textTheme.body1),
+                  TextField(
+                    textAlign: TextAlign.center,
+                    controller: firstnameController,
+                    decoration: InputDecoration(
+                        hintText: "John",
+                        hintStyle: Theme.of(context).textTheme.caption),
+                  ),
+                  SizedBox(
+                    height: ScreenUtil.getInstance().setHeight(30),
+                  ),
+                  Text("Nom", style: Theme.of(context).textTheme.body1),
+                  TextField(
+                    textAlign: TextAlign.center,
+                    controller: lastnameController,
+                    decoration: InputDecoration(
+                        hintText: "Doe",
+                        hintStyle: Theme.of(context).textTheme.caption),
+                  ),
+                  SizedBox(
+                    height: ScreenUtil.getInstance().setHeight(30),
+                  ),
+                  Text("Nom d'utilisateur",
+                      style: Theme.of(context).textTheme.body1),
+                  TextField(
+                    textAlign: TextAlign.center,
+                    controller: usernameController,
+                    decoration: InputDecoration(
+                        hintText: "johndoe",
+                        hintStyle: Theme.of(context).textTheme.caption),
+                  ),
+                  SizedBox(
+                    height: ScreenUtil.getInstance().setHeight(30),
+                  ),
+                  Text("Mot de passe",
+                      style: Theme.of(context).textTheme.body1),
+                  TextField(
+                    textAlign: TextAlign.center,
+                    controller: passwordController,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                        hintText: "Mot de passe",
+                        hintStyle: Theme.of(context).textTheme.caption),
+                  ),
+                  SizedBox(
+                    height: ScreenUtil.getInstance().setHeight(40),
+                  ),
+                  Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        RaisedButton(
+                          onPressed: () {
+                            // callback on the function
+                            _addManager(context, widget.viewModel).then((res) {
+                              if (res) {
+                                _displaySnackBar(
+                                    context, 'Accompagnateur ajoute');
+                              } else {
+                                _displaySnackBar(
+                                    context, 'Une erreur est survenue');
+                              }
+                            });
+                          },
+                          child: Text('Creation',
+                              style: Theme.of(context).textTheme.body1),
+                        ),
+                      ],
                     ),
-                    SizedBox(
-                      height: ScreenUtil.getInstance().setHeight(30),
-                    ),
-                    Text("Nom", style: Theme.of(context).textTheme.body1),
-                    TextField(
-                      textAlign: TextAlign.center,
-                      controller: lastnameController,
-                      decoration: InputDecoration(
-                          hintText: "Doe",
-                          hintStyle: Theme.of(context).textTheme.caption),
-                    ),
-                    SizedBox(
-                      height: ScreenUtil.getInstance().setHeight(30),
-                    ),
-                    Text("Nom d'utilisateur",
-                        style: Theme.of(context).textTheme.body1),
-                    TextField(
-                      textAlign: TextAlign.center,
-                      controller: usernameController,
-                      decoration: InputDecoration(
-                          hintText: "johndoe",
-                          hintStyle: Theme.of(context).textTheme.caption),
-                    ),
-                    SizedBox(
-                      height: ScreenUtil.getInstance().setHeight(30),
-                    ),
-                    Text("Mot de passe",
-                        style: Theme.of(context).textTheme.body1),
-                    TextField(
-                      textAlign: TextAlign.center,
-                      controller: passwordController,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                          hintText: "Mot de passe",
-                          hintStyle: Theme.of(context).textTheme.caption),
-                    ),
-                    SizedBox(
-                      height: ScreenUtil.getInstance().setHeight(40),
-                    ),
-                    Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          RaisedButton(
-                            onPressed: () {
-                              // callback on the function
-                              _addManager(context, widget.viewModel)
-                                  .then((res) {
-                                if (res) {
-                                  _displaySnackBar(
-                                      context, 'Accompagnateur ajoute');
-                                } else {
-                                  _displaySnackBar(
-                                      context, 'Une erreur est survenue');
-                                }
-                              });
-                            },
-                            child: Text('Creation',
-                                style: Theme.of(context).textTheme.body1),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),

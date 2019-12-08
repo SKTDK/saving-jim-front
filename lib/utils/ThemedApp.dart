@@ -5,6 +5,7 @@ abstract class ThemedApp {
   static ThemeData getThemeData() {
     return ThemeData(
       primaryColor: Colors.orange,
+      accentColor: Colors.orangeAccent,
       fontFamily: 'Open Sans',
 
       // Defines the default TextTheme. Use this to specify the default
