@@ -16,8 +16,15 @@ class LoginPageViewModel extends Model {
     notifyListeners();
   }
 
-  void setUser(BuildContext context, String username, String password) async {
-    _currentUser = await apiSvc?.login(username, password);
-    NavigationHandler.handleNavigation(context, _currentUser.accountType);
+  Future<bool> setUser(
+      BuildContext context, String username, String password) async {
+    _currentUser = await apiSvc.login(username, password);
+
+    if (_currentUser == null) {
+      return false;
+    } else {
+      NavigationHandler.handleNavigation(context, _currentUser.accountType);
+      return true;
+    }
   }
 }

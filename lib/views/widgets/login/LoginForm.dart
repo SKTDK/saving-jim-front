@@ -26,7 +26,7 @@ class _LoginFormState extends State<LoginForm> {
     return ScopedModelDescendant<LoginPageViewModel>(
         builder: (context, child, model) {
       return new Container(
-        width: double.infinity,
+        width: ScreenUtil.getInstance().setWidth(800),
         height: ScreenUtil.getInstance().setHeight(displayMode ? 500 : 600),
         decoration: BoxDecoration(
             color: Colors.white,
@@ -80,7 +80,11 @@ class _LoginFormState extends State<LoginForm> {
                   children: <Widget>[
                     RaisedButton(
                       onPressed: () {
-                        _login(context, model);
+                        _login(context, model).then((result) {
+                          if (!result) {
+                            _displaySnackBar(context);
+                          }
+                        });
                       },
                       child: Text('Connexion',
                           style: Theme.of(context).textTheme.body1),
@@ -95,7 +99,17 @@ class _LoginFormState extends State<LoginForm> {
     });
   }
 
-  void _login(BuildContext context, LoginPageViewModel model) {
-    model.setUser(context, usernameController.text, passwordController.text);
+  Future<bool> _login(BuildContext context, LoginPageViewModel model) {
+    return model.setUser(
+        context, usernameController.text, passwordController.text);
+  }
+
+  _displaySnackBar(BuildContext context) {
+    final scaffold = Scaffold.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content: const Text('Invalid username/password'),
+      ),
+    );
   }
 }
