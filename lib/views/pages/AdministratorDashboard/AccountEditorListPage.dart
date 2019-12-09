@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:saving_jim/models/User.dart';
-import 'package:saving_jim/views/widgets/AccountTypeItem.dart';
-import 'package:saving_jim/view_models/AdministratorDashboard/AccountStateViewModel.dart';
+import 'package:saving_jim/views/widgets/AccountEditorItem.dart';
+import 'package:saving_jim/view_models/AdministratorDashboard/AccountEditorViewModel.dart';
 
-class AccountStateListPage extends StatefulWidget {
-  final AccountStateViewModel viewModel;
+class AccountEditorListPage extends StatefulWidget {
+  final AccountEditorViewModel viewModel;
   final List<User> list;
-  AccountStateListPage(
+  AccountEditorListPage(
       {Key key, @required this.viewModel, Key key2, @required this.list})
       : super(key: key);
 
   @override
-  AccountState createState() => AccountState();
+  AccountEditor createState() => AccountEditor();
 }
 
-class AccountState extends State<AccountStateListPage> {
+class AccountEditor extends State<AccountEditorListPage> {
   List<User> list;
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class AccountState extends State<AccountStateListPage> {
         separatorBuilder: (context, index) =>
             Divider(color: Colors.black45, thickness: 2.0, height: 0),
         itemBuilder: (BuildContext context, int index) => Center(
-              child: AccountTypeItem(widget.list[index], widget.viewModel),
+              child: AccountEditorItem(widget.list[index], widget.viewModel),
             ),
         itemCount: widget.list == null ? 0 : widget.list.length);
   }

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:scoped_model/scoped_model.dart';
-import 'package:saving_jim/models/MenuEntry.dart';
-import 'package:saving_jim/views/widgets/EntryItem.dart';
+import 'package:saving_jim/utils/ThemedApp.dart';
+import 'package:saving_jim/views/pages/AdministratorDashboard/AccountEditorPage.dart';
+import 'package:saving_jim/views/pages/AdministratorDashboard/AccountStatePage.dart';
+import 'package:saving_jim/views/pages/AdministratorDashboard/AddManagerPage.dart';
+import 'package:saving_jim/views/pages/AdministratorDashboard/StatisticsPage.dart';
+import 'package:saving_jim/views/pages/Login/LoginPage.dart';
 import 'package:saving_jim/view_models/AdministratorDashboardViewModel.dart';
 
 class AdministratorDashboard extends StatefulWidget {
@@ -16,46 +19,222 @@ class _AdministratorDashboardState extends State<AdministratorDashboard> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: ScopedModel<AdministratorDashboardViewModel>(
-          model: widget.viewModel, child: Menu()),
-    );
-  }
-}
-
-class Menu extends StatefulWidget {
-  @override
-  MenuState createState() => MenuState();
-}
-
-class MenuState extends State<Menu> {
-  List<MenuEntry> _entrySet;
-
-  @override
-  Widget build(BuildContext context) {
-    return ScopedModelDescendant<AdministratorDashboardViewModel>(
-        builder: (context, child, model) {
-      _entrySet = model.populateEntrySet();
-      return SafeArea(
-        child: Scaffold(
-          body: _buildMenu(),
-          appBar: AppBar(
-            title: Text('Tableau de bord - Administrateur'),
+      title: 'Dashboard admin',
+      theme: ThemedApp.getThemeData(),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Administrateur'),
+        ),
+        body: Container(
+          child: ListView(
+            children: <Widget>[
+              Container(
+                color: Theme.of(context).backgroundColor,
+                child: Center(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 100,
+                    child: Center(
+                      child: Text(
+                        widget.viewModel.user == null
+                            ? "Bienvenue"
+                            : "Bienvenue, " + widget.viewModel.user.firstname,
+                        style: Theme.of(context).textTheme.headline,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Divider(color: Theme.of(context).primaryColor, height: 0),
+              Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    stops: [0.1, 0.5, 0.7, 0.9],
+                    colors: [
+                      Colors.blueGrey[800],
+                      Colors.blueGrey[700],
+                      Colors.blueGrey[600],
+                      Colors.blueGrey[400],
+                    ],
+                  ),
+                ),
+                child: ListTile(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AddManagerPage(
+                                viewModel: addManagerViewModel)));
+                  },
+                  title: Center(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 100,
+                      child: Center(
+                        child: Text(
+                          'Créer un compte accompagnateur',
+                          style: Theme.of(context).textTheme.title,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Divider(color: Colors.black, height: 0),
+              Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    stops: [0.1, 0.5, 0.7, 0.9],
+                    colors: [
+                      Colors.green[800],
+                      Colors.green[700],
+                      Colors.green[600],
+                      Colors.green[400],
+                    ],
+                  ),
+                ),
+                child: ListTile(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AccountStatePage(
+                                viewModel: accountStateViewModel)));
+                  },
+                  title: Center(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 100,
+                      child: Center(
+                        child: Text('Activer ou désactiver un compte',
+                            style: Theme.of(context).textTheme.title),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Divider(color: Colors.black, height: 0),
+              Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    stops: [0.1, 0.5, 0.7, 0.9],
+                    colors: [
+                      Colors.blueGrey[800],
+                      Colors.blueGrey[700],
+                      Colors.blueGrey[600],
+                      Colors.blueGrey[400],
+                    ],
+                  ),
+                ),
+                child: ListTile(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AccountEditorPage(
+                                viewModel: accountEditorViewModel)));
+                  },
+                  title: Center(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 100,
+                      child: Center(
+                        child: Text(
+                          'Modifier un compte',
+                          style: Theme.of(context).textTheme.title,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Divider(color: Colors.black, height: 0),
+              Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    stops: [0.1, 0.5, 0.7, 0.9],
+                    colors: [
+                      Colors.green[800],
+                      Colors.green[700],
+                      Colors.green[600],
+                      Colors.green[400],
+                    ],
+                  ),
+                ),
+                child: ListTile(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => StatisticsPage(
+                                viewModel: statisticsViewModel)));
+                  },
+                  title: Center(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 100,
+                      child: Center(
+                        child: Text(
+                          'Statistiques',
+                          style: Theme.of(context).textTheme.title,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Divider(color: Colors.black, height: 0),
+              Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    stops: [0.1, 0.5, 0.7, 0.9],
+                    colors: [
+                      Colors.blueGrey[800],
+                      Colors.blueGrey[700],
+                      Colors.blueGrey[600],
+                      Colors.blueGrey[400],
+                    ],
+                  ),
+                ),
+                child: ListTile(
+                  onTap: () {
+                    widget.viewModel.clearPreferences(context);
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                LoginPage(viewModel: loginPageViewModel)),
+                        (r) => false);
+                  },
+                  title: Center(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 100,
+                      child: Center(
+                        child: Text(
+                          'Se déconnecter',
+                          style: Theme.of(context).textTheme.title,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Divider(color: Colors.black, height: 0),
+            ],
           ),
         ),
-      );
-    });
-  }
-
-// First we build the Menu Wrapped in a ListView Widget
-// Here we set the styling of our Menu rows/entries
-  Widget _buildMenu() {
-    return ListView.separated(
-        separatorBuilder: (context, index) => Divider(
-              color: Colors.black45,
-            ),
-        itemBuilder: (BuildContext context, int index) => Center(
-              child: EntryItem(_entrySet[index]),
-            ),
-        itemCount: _entrySet.length);
+      ),
+    );
   }
 }

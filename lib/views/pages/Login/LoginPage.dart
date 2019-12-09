@@ -27,45 +27,71 @@ class _LoginPageState extends State<LoginPage>
       theme: ThemedApp.getThemeData(),
       home: new Scaffold(
         resizeToAvoidBottomPadding: true,
-        body: Stack(
-          fit: StackFit.expand,
-          children: <Widget>[
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: <Widget>[
-                // Background image
-                //Image.asset("assets/images/logo.png"),
-              ],
-            ),
-            SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.only(left: 28.0, right: 28.0, top: 60.0),
-                child: Column(
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Image.asset(
-                          "assets/images/logo.png",
-                          width: ScreenUtil.getInstance().setWidth(110),
-                          height: ScreenUtil.getInstance().setHeight(110),
-                        ),
-                        Text("ESOPE BD",
-                            style: TextStyle(
-                                fontSize: 58.0,
-                                letterSpacing: .09,
-                                fontWeight: FontWeight.bold)),
-                      ],
-                    ),
-                    SizedBox(
-                      height: ScreenUtil.getInstance().setHeight(180),
-                    ),
-                    ScopedModel<LoginPageViewModel>(
-                        model: widget.viewModel, child: LoginForm()),
-                  ],
-                ),
+        body: Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                stops: [0.1, 0.5, 0.7, 0.9],
+                colors: [
+                  Colors.blueGrey[800],
+                  Colors.blueGrey[700],
+                  Colors.blueGrey[600],
+                  Colors.blueGrey[400],
+                ],
               ),
-            )
-          ],
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.black12,
+                    offset: Offset(0.0, 15.0),
+                    blurRadius: 15.0),
+                BoxShadow(
+                    color: Colors.black12,
+                    offset: Offset(0.0, -10.0),
+                    blurRadius: 10.0),
+              ]),
+          child: Stack(
+            fit: StackFit.expand,
+            children: <Widget>[
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  // Background image
+                  //Image.asset("assets/images/logo.png"),
+                ],
+              ),
+              SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.only(left: 28.0, right: 28.0, top: 60.0),
+                  child: Column(
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Image.asset(
+                            "assets/images/logo.png",
+                            width: ScreenUtil.getInstance().setWidth(110),
+                            height: ScreenUtil.getInstance().setHeight(110),
+                          ),
+                          Text("ESOPE BD",
+                              style: TextStyle(
+                                  fontSize: 58.0,
+                                  letterSpacing: .09,
+                                  fontWeight: FontWeight.bold)),
+                        ],
+                      ),
+                      SizedBox(
+                        height: ScreenUtil.getInstance().setHeight(180),
+                      ),
+                      ScopedModel<LoginPageViewModel>(
+                          model: widget.viewModel, child: LoginForm()),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

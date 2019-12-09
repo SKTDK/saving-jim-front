@@ -38,7 +38,7 @@ class User {
         'account_type': this._accountType,
         'first_name': this._firstname,
         'last_name': this._lastname,
-        'login': this._username,
+        'username': this._username,
         'active': this._active,
         'modified_on': this._modifiedOn,
         'modified_by': this._modifiedBy,
@@ -57,8 +57,16 @@ class User {
     return this._firstname;
   }
 
+  set firstname(String val) {
+    this._firstname = val;
+  }
+
   String get lastname {
     return this._lastname;
+  }
+
+  set lastname(String val) {
+    this._lastname = val;
   }
 
   String get username {

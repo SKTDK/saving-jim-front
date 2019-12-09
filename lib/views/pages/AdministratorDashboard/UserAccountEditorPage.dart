@@ -1,24 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:saving_jim/utils/ThemedApp.dart';
-import 'package:saving_jim/view_models/AdministratorDashboard/AddManagerViewModel.dart';
+import 'package:saving_jim/view_models/AdministratorDashboard/AccountEditorViewModel.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:saving_jim/views/widgets/CustomButton.dart';
 
-class AddManagerPage extends StatefulWidget {
-  final AddManagerViewModel viewModel;
+class UserAccountEditorPage extends StatefulWidget {
+  final AccountEditorViewModel viewModel;
 
-  AddManagerPage({Key key, @required this.viewModel}) : super(key: key);
+  UserAccountEditorPage({Key key, @required this.viewModel}) : super(key: key);
 
   @override
-  _AddManagerPageState createState() => _AddManagerPageState();
+  _UserAccountEditorPageState createState() => _UserAccountEditorPageState();
 }
 
-class _AddManagerPageState extends State<AddManagerPage>
+class _UserAccountEditorPageState extends State<UserAccountEditorPage>
     with SingleTickerProviderStateMixin {
   var firstnameController = TextEditingController();
   var lastnameController = TextEditingController();
-  var usernameController = TextEditingController();
   var passwordController = TextEditingController();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -26,7 +24,6 @@ class _AddManagerPageState extends State<AddManagerPage>
   void dispose() {
     firstnameController.dispose();
     lastnameController.dispose();
-    usernameController.dispose();
     passwordController.dispose();
     super.dispose();
   }
@@ -40,7 +37,10 @@ class _AddManagerPageState extends State<AddManagerPage>
       theme: ThemedApp.getThemeData(),
       home: new Scaffold(
         appBar: AppBar(
-          title: Text('Creation compte accompagnateur'),
+          title: Text('Modifier un compte: ' +
+              (widget.viewModel.selectedUser == null
+                  ? ""
+                  : widget.viewModel.selectedUser.username)),
         ),
         key: _scaffoldKey,
         body: SafeArea(
@@ -48,40 +48,34 @@ class _AddManagerPageState extends State<AddManagerPage>
             width: double.infinity,
             height: double.infinity,
             decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topRight,
-                  end: Alignment.bottomLeft,
-                  stops: [0.1, 0.5, 0.7, 0.9],
-                  colors: [
-                    Colors.blueGrey[800],
-                    Colors.blueGrey[700],
-                    Colors.blueGrey[600],
-                    Colors.blueGrey[400],
-                  ],
-                ),
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.black12,
-                      offset: Offset(0.0, 15.0),
-                      blurRadius: 15.0),
-                  BoxShadow(
-                      color: Colors.black12,
-                      offset: Offset(0.0, -10.0),
-                      blurRadius: 10.0),
-                ]),
+              gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                stops: [0.1, 0.5, 0.7, 0.9],
+                colors: [
+                  Colors.blueGrey[800],
+                  Colors.blueGrey[700],
+                  Colors.blueGrey[600],
+                  Colors.blueGrey[400],
+                ],
+              ),
+            ),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   SizedBox(
-                    height: ScreenUtil.getInstance().setHeight(60),
+                    height: 30,
                   ),
-                  Text("Prenom", style: Theme.of(context).textTheme.body1),
+                  Text("Prénom", style: Theme.of(context).textTheme.body1),
                   TextField(
+                    style: new TextStyle(color: Colors.white),
                     textAlign: TextAlign.center,
                     controller: firstnameController,
                     decoration: InputDecoration(
-                      hintText: "John",
+                      hintText: widget.viewModel.selectedUser == null
+                          ? "Prénom"
+                          : widget.viewModel.selectedUser.firstname,
                       hintStyle: TextStyle(color: Colors.white),
                       enabledBorder: new UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.white, width: 1.0),
@@ -96,29 +90,13 @@ class _AddManagerPageState extends State<AddManagerPage>
                   ),
                   Text("Nom", style: Theme.of(context).textTheme.body1),
                   TextField(
+                    style: new TextStyle(color: Colors.white),
                     textAlign: TextAlign.center,
                     controller: lastnameController,
                     decoration: InputDecoration(
-                      hintText: "Doe",
-                      hintStyle: TextStyle(color: Colors.white),
-                      enabledBorder: new UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white, width: 1.0),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blueAccent),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: ScreenUtil.getInstance().setHeight(30),
-                  ),
-                  Text("Nom d'utilisateur",
-                      style: Theme.of(context).textTheme.body1),
-                  TextField(
-                    textAlign: TextAlign.center,
-                    controller: usernameController,
-                    decoration: InputDecoration(
-                      hintText: "johndoe",
+                      hintText: widget.viewModel.selectedUser == null
+                          ? "Nom"
+                          : widget.viewModel.selectedUser.lastname,
                       hintStyle: TextStyle(color: Colors.white),
                       enabledBorder: new UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.white, width: 1.0),
@@ -134,6 +112,7 @@ class _AddManagerPageState extends State<AddManagerPage>
                   Text("Mot de passe",
                       style: Theme.of(context).textTheme.body1),
                   TextField(
+                    style: new TextStyle(color: Colors.white),
                     textAlign: TextAlign.center,
                     controller: passwordController,
                     obscureText: true,
@@ -157,13 +136,18 @@ class _AddManagerPageState extends State<AddManagerPage>
                       children: <Widget>[
                         RaisedButton(
                           onPressed: () {
-                            _addManager(context, widget.viewModel).then((res) {
-                              if (res) {
-                                _displaySnackBar(
-                                    context, 'Accompagnateur ajoute');
+                            widget.viewModel
+                                .updateSelectedUser(
+                                    firstnameController.text,
+                                    lastnameController.text,
+                                    passwordController.text)
+                                .then((result) {
+                              if (result) {
+                                _displaySnackBar(context,
+                                    'Modification réalisée avec succès');
                               } else {
                                 _displaySnackBar(
-                                    context, 'Une erreur est survenue');
+                                    context, 'Une erreur s\'est produite!');
                               }
                             });
                           },
@@ -180,16 +164,13 @@ class _AddManagerPageState extends State<AddManagerPage>
                             )),
                             padding: const EdgeInsets.all(10.0),
                             child: Text(
-                              "Sauvegarder",
+                              "Modifier",
                               textAlign: TextAlign.center,
                             ),
                           ),
                         ),
                       ],
                     ),
-                  ),
-                  SizedBox(
-                    height: ScreenUtil.getInstance().setHeight(30),
                   ),
                 ],
               ),
@@ -198,16 +179,6 @@ class _AddManagerPageState extends State<AddManagerPage>
         ),
       ),
     );
-  }
-
-  Future<bool> _addManager(
-      BuildContext context, AddManagerViewModel model) async {
-    return model.addManager(
-        context,
-        firstnameController.text,
-        lastnameController.text,
-        usernameController.text,
-        passwordController.text);
   }
 
   _displaySnackBar(BuildContext context, String text) {

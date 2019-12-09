@@ -146,6 +146,44 @@ class ApiService implements IApiService {
     }
   }
 
+  // change account state
+  Future<bool> updateAccount(int currentId, String newFirstname,
+      String newLastname, String newPassword) async {
+    Map map = {
+      'id': currentId,
+      'firstname': newFirstname,
+      'lastname': newLastname,
+      'password': newPassword,
+    };
+    String remote = _localhost();
+    String url = remote +
+        ':' +
+        constants.SERVER_PORT.toString() +
+        "/accounts/updateAccount";
+
+    HttpClient httpClient = new HttpClient();
+    HttpClientRequest request = await httpClient.postUrl(Uri.parse(url));
+    request.headers.set('content-type', 'application/json');
+    // auth with jwt token
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    request.headers.set('authorization', sharedPreferences.get('token'));
+
+    request.add(utf8.encode(jsonEncode(map)));
+
+    HttpClientResponse response = await request.close();
+
+    String reply = await response.transform(utf8.decoder).join();
+
+    httpClient.close();
+    final body = jsonDecode(reply);
+    if (body['success']) {
+      print('Done');
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   String _localhost() {
     if (Platform.isAndroid) {
       return constants.SERVER_ADDRESS_ANDROID;

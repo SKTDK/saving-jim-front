@@ -49,12 +49,12 @@ class _LoginFormState extends State<LoginForm> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text("Connexion à Esope BD",
-                    style: Theme.of(context).textTheme.title),
+                    style: Theme.of(context).textTheme.subhead),
                 SizedBox(
                   height: ScreenUtil.getInstance().setHeight(30),
                 ),
                 Text("Nom d'utilisateur",
-                    style: Theme.of(context).textTheme.body1),
+                    style: Theme.of(context).textTheme.body2),
                 TextField(
                   controller: usernameController,
                   decoration: InputDecoration(
@@ -64,7 +64,7 @@ class _LoginFormState extends State<LoginForm> {
                 SizedBox(
                   height: ScreenUtil.getInstance().setHeight(30),
                 ),
-                Text("Mot de passe", style: Theme.of(context).textTheme.body1),
+                Text("Mot de passe", style: Theme.of(context).textTheme.body2),
                 TextField(
                   controller: passwordController,
                   obscureText: true,
@@ -86,8 +86,23 @@ class _LoginFormState extends State<LoginForm> {
                           }
                         });
                       },
-                      child: Text('Connexion',
-                          style: Theme.of(context).textTheme.body1),
+                      textColor: Colors.white,
+                      padding: const EdgeInsets.all(0.0),
+                      child: Container(
+                        width: 300,
+                        decoration: new BoxDecoration(
+                            gradient: new LinearGradient(
+                          colors: [
+                            Color.fromARGB(255, 148, 231, 225),
+                            Color.fromARGB(255, 62, 182, 226)
+                          ],
+                        )),
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(
+                          "Connexion",
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
                     ),
                   ],
                 ),
