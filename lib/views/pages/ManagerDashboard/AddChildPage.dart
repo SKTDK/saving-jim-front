@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:saving_jim/utils/ThemedApp.dart';
-import 'package:saving_jim/view_models/AdministratorDashboard/AddManagerViewModel.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:saving_jim/view_models/ManagerDashboard/AddChildViewModel.dart';
 
-class AddManagerPage extends StatefulWidget {
-  final AddManagerViewModel viewModel;
+class AddChildPage extends StatefulWidget {
+  final AddChildViewModel viewModel;
 
-  AddManagerPage({Key key, @required this.viewModel}) : super(key: key);
+  AddChildPage({Key key, @required this.viewModel}) : super(key: key);
 
   @override
-  _AddManagerPageState createState() => _AddManagerPageState();
+  _AddChildPageState createState() => _AddChildPageState();
 }
 
-class _AddManagerPageState extends State<AddManagerPage>
+class _AddChildPageState extends State<AddChildPage>
     with SingleTickerProviderStateMixin {
   var firstnameController = TextEditingController();
   var lastnameController = TextEditingController();
@@ -39,7 +39,7 @@ class _AddManagerPageState extends State<AddManagerPage>
       theme: ThemedApp.getThemeData(),
       home: new Scaffold(
         appBar: AppBar(
-          title: Text('Création compte accompagnateur'),
+          title: Text('Création compte enfant'),
         ),
         key: _scaffoldKey,
         body: SafeArea(
@@ -156,10 +156,9 @@ class _AddManagerPageState extends State<AddManagerPage>
                       children: <Widget>[
                         RaisedButton(
                           onPressed: () {
-                            _addManager(context, widget.viewModel).then((res) {
+                            _addUser(context, widget.viewModel).then((res) {
                               if (res) {
-                                _displaySnackBar(
-                                    context, 'Accompagnateur ajouté');
+                                _displaySnackBar(context, 'Enfant ajouté');
                               } else {
                                 _displaySnackBar(
                                     context, 'Une erreur est survenue');
@@ -199,9 +198,8 @@ class _AddManagerPageState extends State<AddManagerPage>
     );
   }
 
-  Future<bool> _addManager(
-      BuildContext context, AddManagerViewModel model) async {
-    return model.addManager(
+  Future<bool> _addUser(BuildContext context, AddChildViewModel model) async {
+    return model.addUser(
         context,
         firstnameController.text,
         lastnameController.text,

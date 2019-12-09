@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:saving_jim/models/Game.dart';
+import 'package:saving_jim/views/pages/ChildDashboard/GameListPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:saving_jim/services/IApiService.dart';
 import 'package:saving_jim/models/User.dart';
@@ -37,19 +39,18 @@ class ApiService implements IApiService {
   }
 
 // add manager
-  Future<bool> addManager(String firstname, String lastname, String username,
-      String password) async {
+  Future<bool> addUser(String firstname, String lastname, String username,
+      String password, int accountType) async {
     Map map = {
+      'accountType': accountType,
       'firstname': firstname,
       'lastname': lastname,
       'username': username,
       'password': password
     };
     String remote = _localhost();
-    String url = remote +
-        ':' +
-        constants.SERVER_PORT.toString() +
-        "/accounts/addManager";
+    String url =
+        remote + ':' + constants.SERVER_PORT.toString() + "/accounts/addUser";
 
     HttpClient httpClient = new HttpClient();
     HttpClientRequest request = await httpClient.postUrl(Uri.parse(url));
@@ -191,4 +192,6 @@ class ApiService implements IApiService {
       return constants.SERVER_ADDRESS_IOS;
     }
   }
+
+  Future<List<Game>> fetchGames(int typeInt) {}
 }
