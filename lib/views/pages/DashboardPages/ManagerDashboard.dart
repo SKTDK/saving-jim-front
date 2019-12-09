@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:saving_jim/utils/ThemedApp.dart';
 import 'package:saving_jim/views/pages/Login/LoginPage.dart';
 import 'package:saving_jim/views/pages/ManagerDashboard/AddChildPage.dart';
+import 'package:saving_jim/views/pages/ManagerDashboard/CreateGameListPage.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:saving_jim/view_models/ManagerDashboardViewModel.dart';
 
@@ -71,6 +72,43 @@ class _ManagerDashboardState extends State<ManagerDashboard> {
                       child: Center(
                         child: Text(
                           'Ajouter un enfant',
+                          style: Theme.of(context).textTheme.title,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Divider(color: Theme.of(context).primaryColor, height: 0),
+              Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    stops: [0.1, 0.5, 0.7, 0.9],
+                    colors: [
+                      Colors.green[800],
+                      Colors.green[700],
+                      Colors.green[600],
+                      Colors.green[400],
+                    ],
+                  ),
+                ),
+                child: ListTile(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CreateGameListPage(
+                                viewModel: createGameViewModel)));
+                  },
+                  title: Center(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 100,
+                      child: Center(
+                        child: Text(
+                          'Créer une partie',
                           style: Theme.of(context).textTheme.title,
                         ),
                       ),
