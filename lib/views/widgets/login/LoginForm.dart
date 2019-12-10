@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:saving_jim/view_models/LoginPageViewModel.dart';
 
@@ -26,8 +25,8 @@ class _LoginFormState extends State<LoginForm> {
     return ScopedModelDescendant<LoginPageViewModel>(
         builder: (context, child, model) {
       return new Container(
-        width: ScreenUtil.getInstance().setWidth(800),
-        height: ScreenUtil.getInstance().setHeight(displayMode ? 500 : 600),
+        width: 800,
+        height: displayMode ? 400 : 500,
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(8.0),
@@ -51,7 +50,7 @@ class _LoginFormState extends State<LoginForm> {
                 Text("Connexion à Esope BD",
                     style: Theme.of(context).textTheme.subhead),
                 SizedBox(
-                  height: ScreenUtil.getInstance().setHeight(30),
+                  height: 30,
                 ),
                 Text("Nom d'utilisateur",
                     style: Theme.of(context).textTheme.body2),
@@ -62,7 +61,7 @@ class _LoginFormState extends State<LoginForm> {
                       hintStyle: Theme.of(context).textTheme.caption),
                 ),
                 SizedBox(
-                  height: ScreenUtil.getInstance().setHeight(30),
+                  height: 30,
                 ),
                 Text("Mot de passe", style: Theme.of(context).textTheme.body2),
                 TextField(
@@ -73,7 +72,7 @@ class _LoginFormState extends State<LoginForm> {
                       hintStyle: Theme.of(context).textTheme.caption),
                 ),
                 SizedBox(
-                  height: ScreenUtil.getInstance().setHeight(40),
+                  height: 40,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

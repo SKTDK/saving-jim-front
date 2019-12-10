@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:saving_jim/view_models/Game/GameViewModel.dart';
+import 'package:saving_jim/views/pages/GamePages/CategoriesListPage.dart';
 import 'package:saving_jim/views/pages/ManagerDashboard/CreateGameListPage.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:meta/meta.dart';
@@ -6,10 +8,12 @@ import 'package:saving_jim/models/User.dart';
 import 'package:saving_jim/services/ApiService.dart';
 import 'package:saving_jim/utils/constants.dart' as constants;
 
+final GameViewModel gameViewModel = GameViewModel(apiSvc: ApiService());
+
 class CreateGameViewModel extends Model {
   final ApiService apiSvc;
   CreateGameViewModel({@required this.apiSvc});
-
+  final GameViewModel gameViewModel = GameViewModel(apiSvc: ApiService());
   Future<List<User>> _users;
   Future<List<User>> get users => _users;
   set users(Future<List<User>> value) {
@@ -41,7 +45,12 @@ class CreateGameViewModel extends Model {
     return _users;
   }
 
-  void createGame(User root) {
-    //
+  void createGame(User root, BuildContext context) {
+    gameViewModel.user = root;
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => CategoriesListPage(viewModel: gameViewModel),
+        ));
   }
 }

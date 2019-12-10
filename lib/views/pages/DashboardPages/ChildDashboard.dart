@@ -47,12 +47,7 @@ class _ChildDashboardState extends State<ChildDashboard> {
                     begin: Alignment.topRight,
                     end: Alignment.bottomLeft,
                     stops: [0.1, 0.5, 0.7, 0.9],
-                    colors: [
-                      Colors.blueGrey[800],
-                      Colors.blueGrey[700],
-                      Colors.blueGrey[600],
-                      Colors.blueGrey[400],
-                    ],
+                    colors: ThemedApp.secondaryGradient,
                   ),
                 ),
                 child: ListTile(
@@ -84,12 +79,7 @@ class _ChildDashboardState extends State<ChildDashboard> {
                     begin: Alignment.topRight,
                     end: Alignment.bottomLeft,
                     stops: [0.1, 0.5, 0.7, 0.9],
-                    colors: [
-                      Colors.blueGrey[800],
-                      Colors.blueGrey[700],
-                      Colors.blueGrey[600],
-                      Colors.blueGrey[400],
-                    ],
+                    colors: ThemedApp.secondaryGradient,
                   ),
                 ),
                 child: ListTile(

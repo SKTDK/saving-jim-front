@@ -7,10 +7,15 @@ import 'package:saving_jim/services/ApiService.dart';
 import 'package:saving_jim/view_models/LoginPageViewModel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'ManagerDashboard/EditChildViewModel.dart';
+
 final LoginPageViewModel loginPageViewModel =
     LoginPageViewModel(apiSvc: ApiService());
 final AddChildViewModel addChildViewModel =
     AddChildViewModel(apiSvc: ApiService());
+
+final EditChildViewModel editChildViewModel =
+    EditChildViewModel(apiSvc: ApiService());
 final CreateGameViewModel createGameViewModel =
     CreateGameViewModel(apiSvc: ApiService());
 

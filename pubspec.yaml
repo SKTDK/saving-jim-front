@@ -33,7 +33,7 @@ dependencies:
   #testing
   mockito: ^4.1.1
 
-  beauty_textfield: ^0.0.1
+  pie_chart: ^3.1.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -54,7 +54,15 @@ flutter:
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/logo.png
+    - assets/img/logo.png
+    - assets/img/categories/
+    - assets/img/deplacements/
+    - assets/img/habitation/
+    - assets/img/loisirs/
+    - assets/img/nutrition/
+    - assets/img/relationscom/
+    - assets/img/responsabilites/
+    - assets/img/soinspersonnels/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see

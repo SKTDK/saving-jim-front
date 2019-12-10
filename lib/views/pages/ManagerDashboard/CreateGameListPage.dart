@@ -37,8 +37,8 @@ class CreateGame extends State<CreateGameListPage> {
             separatorBuilder: (context, index) =>
                 Divider(color: Colors.black45, thickness: 2.0, height: 0),
             itemBuilder: (BuildContext context, int index) => Center(
-                  child:
-                      ChildListItem(projectSnap.data[index], widget.viewModel),
+                  child: ChildListItem(
+                      index, projectSnap.data[index], widget.viewModel),
                 ),
             itemCount: projectSnap.data == null ? 0 : projectSnap.data.length);
       },

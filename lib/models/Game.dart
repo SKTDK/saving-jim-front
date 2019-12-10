@@ -1,6 +1,5 @@
 class Game {
-  // Official Doc for models
-  // https://flutter.dev/docs/development/data-and-backend/json
+  // TODO
   int _id;
   int _workerId;
   int _childId;

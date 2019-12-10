@@ -1,32 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:saving_jim/models/User.dart';
+import 'package:saving_jim/utils/ThemedApp.dart';
 import 'package:saving_jim/view_models/ManagerDashboard/CreateGameViewModel.dart';
 
 // This is the design of a single user item within the accountstate page
 class ChildListItem extends StatelessWidget {
-  const ChildListItem(this.user, this.vm);
-
+  const ChildListItem(this.index, this.user, this.vm);
+  final int index;
   final User user;
   final CreateGameViewModel vm;
 
   Widget _buildTiles(User root, BuildContext context) {
     return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+          stops: [0.1, 0.5, 0.7, 0.9],
+          colors: index % 2 == 0
+              ? ThemedApp.primaryGradient
+              : ThemedApp.secondaryGradient,
+        ),
+      ),
       child: ListTile(
         onTap: () {
-          vm.createGame(root);
+          vm.createGame(root, context);
         },
         title: Container(
           width: MediaQuery.of(context).size.width,
           height: 100,
           child: Center(
-            child: Text(
-              root.username,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 40,
-                letterSpacing: .09,
-              ),
-            ),
+            child: Text(root.username,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.title),
           ),
         ),
       ),

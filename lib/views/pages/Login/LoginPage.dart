@@ -35,12 +35,7 @@ class _LoginPageState extends State<LoginPage>
                 begin: Alignment.topRight,
                 end: Alignment.bottomLeft,
                 stops: [0.1, 0.5, 0.7, 0.9],
-                colors: [
-                  Colors.blueGrey[800],
-                  Colors.blueGrey[700],
-                  Colors.blueGrey[600],
-                  Colors.blueGrey[400],
-                ],
+                colors: ThemedApp.secondaryGradient,
               ),
               boxShadow: [
                 BoxShadow(
@@ -70,7 +65,7 @@ class _LoginPageState extends State<LoginPage>
                       Row(
                         children: <Widget>[
                           Image.asset(
-                            "assets/images/logo.png",
+                            "assets/img/logo.png",
                             width: ScreenUtil.getInstance().setWidth(110),
                             height: ScreenUtil.getInstance().setHeight(110),
                           ),

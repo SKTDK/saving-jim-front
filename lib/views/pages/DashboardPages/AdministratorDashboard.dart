@@ -89,12 +89,7 @@ class _AdministratorDashboardState extends State<AdministratorDashboard> {
                     begin: Alignment.topRight,
                     end: Alignment.bottomLeft,
                     stops: [0.1, 0.5, 0.7, 0.9],
-                    colors: [
-                      Colors.green[800],
-                      Colors.green[700],
-                      Colors.green[600],
-                      Colors.green[400],
-                    ],
+                    colors: ThemedApp.primaryGradient,
                   ),
                 ),
                 child: ListTile(
@@ -161,12 +156,7 @@ class _AdministratorDashboardState extends State<AdministratorDashboard> {
                     begin: Alignment.topRight,
                     end: Alignment.bottomLeft,
                     stops: [0.1, 0.5, 0.7, 0.9],
-                    colors: [
-                      Colors.green[800],
-                      Colors.green[700],
-                      Colors.green[600],
-                      Colors.green[400],
-                    ],
+                    colors: ThemedApp.primaryGradient,
                   ),
                 ),
                 child: ListTile(

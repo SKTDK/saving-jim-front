@@ -56,7 +56,7 @@ class _AppState extends State<App> {
       body: Container(
         margin: EdgeInsets.all(300),
         child: new Center(
-          child: new Image.asset('assets/images/logo.png'),
+          child: new Image.asset('assets/img/logo.png'),
         ),
       ),
     );

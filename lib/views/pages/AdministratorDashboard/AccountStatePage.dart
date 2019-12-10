@@ -44,13 +44,7 @@ class _AccountStatePageState extends State<AccountStatePage> {
                   end: Alignment.bottomLeft,
                   // Add one stop for each color. Stops should increase from 0 to 1
                   stops: [0.1, 0.5, 0.7, 0.9],
-                  colors: [
-                    // Colors are easy thanks to Flutter's Colors class.
-                    Colors.blueGrey[800],
-                    Colors.blueGrey[700],
-                    Colors.blueGrey[600],
-                    Colors.blueGrey[400],
-                  ],
+                  colors: ThemedApp.secondaryGradient,
                 ),
                 boxShadow: [
                   BoxShadow(

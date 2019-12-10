@@ -10,33 +10,36 @@ abstract class ThemedApp {
       primaryColorDark: Colors.black54,
       backgroundColor: Colors.black,
       fontFamily: 'Open Sans',
-      // Defines the default TextTheme. Use this to specify the default
-      // text styling for headlines, titles, bodies of text, and more.
+      // Defines the default TextTheme
       textTheme: TextTheme(
-          headline: TextStyle(
-              color: Colors.white,
-              fontSize: 58.0,
-              letterSpacing: .09,
-              fontWeight: FontWeight.bold),
-          title: TextStyle(
-              color: Colors.white,
-              fontSize: 36.0,
-              fontWeight: FontWeight.normal),
-          subhead: TextStyle(
-              color: Colors.black87,
-              fontSize: 36.0,
-              fontWeight: FontWeight.normal),
-          caption: TextStyle(color: Colors.white, fontSize: 12.0),
-          body1: TextStyle(color: Colors.white, fontSize: 20.0),
-          body2: TextStyle(color: Colors.black87, fontSize: 20.0)),
-
-      // Defines the default ButtonThemeData.
-      // ButtonTextTheme.primary = if button dark -> text white. If button bright -> text dark (auto)
-      buttonTheme: ButtonThemeData(
-        shape: RoundedRectangleBorder(),
-        buttonColor: Colors.black87,
-        textTheme: ButtonTextTheme.primary,
+        headline: TextStyle(
+            color: Colors.white,
+            fontSize: 58.0,
+            letterSpacing: .09,
+            fontWeight: FontWeight.bold),
+        title: TextStyle(
+            color: Colors.white, fontSize: 36.0, fontWeight: FontWeight.normal),
+        subhead: TextStyle(
+            color: Colors.black87,
+            fontSize: 36.0,
+            fontWeight: FontWeight.normal),
+        caption: TextStyle(color: Colors.white, fontSize: 12.0),
+        body1: TextStyle(color: Colors.white, fontSize: 20.0),
+        body2: TextStyle(color: Colors.black87, fontSize: 20.0),
       ),
     );
   }
+
+  static final List<Color> primaryGradient = [
+    Colors.green[800],
+    Colors.green[700],
+    Colors.green[600],
+    Colors.green[400],
+  ];
+  static final List<Color> secondaryGradient = [
+    Colors.blueGrey[800],
+    Colors.blueGrey[700],
+    Colors.blueGrey[600],
+    Colors.blueGrey[400],
+  ];
 }
