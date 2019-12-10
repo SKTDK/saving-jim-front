@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:saving_jim/utils/ThemedApp.dart';
+import 'package:saving_jim/view_models/Dashboards/ManagerDashboardViewModel.dart';
 import 'package:saving_jim/views/pages/Login/LoginPage.dart';
 import 'package:saving_jim/views/pages/ManagerDashboard/AddChildPage.dart';
 import 'package:saving_jim/views/pages/ManagerDashboard/CreateGameListPage.dart';
 import 'package:saving_jim/views/pages/ManagerDashboard/EditChildListPage.dart';
-import 'package:scoped_model/scoped_model.dart';
-import 'package:saving_jim/view_models/ManagerDashboardViewModel.dart';
 
 class ManagerDashboard extends StatefulWidget {
   final ManagerDashboardViewModel viewModel;

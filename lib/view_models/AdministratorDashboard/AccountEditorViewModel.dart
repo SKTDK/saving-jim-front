@@ -14,6 +14,7 @@ class AccountEditorViewModel extends Model {
   final ApiService apiSvc;
   AccountEditorViewModel({@required this.apiSvc});
 
+  // fetch account list
   Future<List<User>> _users;
   Future<List<User>> get users => _users;
   set users(Future<List<User>> value) {
@@ -21,7 +22,7 @@ class AccountEditorViewModel extends Model {
     notifyListeners();
   }
 
-// gets the current user
+  // gets the current user
   User _currentUser;
   User get currentUser => _currentUser;
 
@@ -34,6 +35,7 @@ class AccountEditorViewModel extends Model {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     currentUser =
         new User.fromJson(jsonDecode(sharedPreferences.getString('user')));
+    notifyListeners();
   }
 
   Future<List<User>> fetchUsers(String accountType) async {

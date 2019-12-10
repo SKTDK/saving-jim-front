@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:saving_jim/utils/ThemedApp.dart';
+import 'package:saving_jim/view_models/Dashboards/AdministratorDashboardViewModel.dart';
 import 'package:saving_jim/views/pages/AdministratorDashboard/AccountEditorPage.dart';
 import 'package:saving_jim/views/pages/AdministratorDashboard/AccountStatePage.dart';
 import 'package:saving_jim/views/pages/AdministratorDashboard/AddManagerPage.dart';
 import 'package:saving_jim/views/pages/AdministratorDashboard/StatisticsPage.dart';
 import 'package:saving_jim/views/pages/Login/LoginPage.dart';
-import 'package:saving_jim/view_models/AdministratorDashboardViewModel.dart';
 
 class AdministratorDashboard extends StatefulWidget {
   final AdministratorDashboardViewModel viewModel;

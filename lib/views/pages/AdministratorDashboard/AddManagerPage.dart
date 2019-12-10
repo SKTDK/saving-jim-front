@@ -72,6 +72,7 @@ class _AddManagerPageState extends State<AddManagerPage>
                   ),
                   Text("Prénom", style: Theme.of(context).textTheme.body1),
                   TextField(
+                    style: new TextStyle(color: Colors.white),
                     textAlign: TextAlign.center,
                     controller: firstnameController,
                     decoration: InputDecoration(
@@ -90,6 +91,7 @@ class _AddManagerPageState extends State<AddManagerPage>
                   ),
                   Text("Nom", style: Theme.of(context).textTheme.body1),
                   TextField(
+                    style: new TextStyle(color: Colors.white),
                     textAlign: TextAlign.center,
                     controller: lastnameController,
                     decoration: InputDecoration(
@@ -109,6 +111,7 @@ class _AddManagerPageState extends State<AddManagerPage>
                   Text("Nom d'utilisateur",
                       style: Theme.of(context).textTheme.body1),
                   TextField(
+                    style: new TextStyle(color: Colors.white),
                     textAlign: TextAlign.center,
                     controller: usernameController,
                     decoration: InputDecoration(
@@ -128,6 +131,7 @@ class _AddManagerPageState extends State<AddManagerPage>
                   Text("Mot de passe",
                       style: Theme.of(context).textTheme.body1),
                   TextField(
+                    style: new TextStyle(color: Colors.white),
                     textAlign: TextAlign.center,
                     controller: passwordController,
                     obscureText: true,

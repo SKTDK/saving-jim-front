@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:saving_jim/view_models/Game/GameViewModel.dart';
-import 'package:saving_jim/views/widgets/CategoryListItem.dart';
 import 'package:saving_jim/views/widgets/HabitItem.dart';
 
 class HabitsListPage extends StatefulWidget {

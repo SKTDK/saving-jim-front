@@ -28,6 +28,6 @@ class StatisticsViewModel extends Model {
         () => double.parse(statistics[2].count.toString()));
     dataMap.putIfAbsent(
         "Enfants", () => double.parse(statistics[3].count.toString()));
-    return await dataMap;
+    return dataMap;
   }
 }

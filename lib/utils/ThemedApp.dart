@@ -7,9 +7,10 @@ abstract class ThemedApp {
       primaryColor: Colors.black,
       accentColor: Colors.blueGrey,
       primaryColorLight: Colors.black38,
-      primaryColorDark: Colors.black54,
+      primaryColorDark: Colors.blueGrey[900],
       backgroundColor: Colors.black,
       fontFamily: 'Open Sans',
+
       // Defines the default TextTheme
       textTheme: TextTheme(
         headline: TextStyle(
@@ -41,5 +42,19 @@ abstract class ThemedApp {
     Colors.blueGrey[700],
     Colors.blueGrey[600],
     Colors.blueGrey[400],
+  ];
+
+// Funny colors for the kids :)
+  static final List<Color> primaryGradientChild = [
+    Colors.green[800],
+    Colors.green[700],
+    Colors.green[600],
+    Colors.green[400],
+  ];
+  static final List<Color> secondaryGradientChild = [
+    Colors.deepPurple[800],
+    Colors.deepPurple[700],
+    Colors.deepPurple[600],
+    Colors.deepPurple[400],
   ];
 }

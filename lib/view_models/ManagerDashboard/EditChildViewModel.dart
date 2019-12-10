@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:saving_jim/view_models/Game/GameViewModel.dart';
-import 'package:saving_jim/views/pages/GamePages/CategoriesListPage.dart';
-import 'package:saving_jim/views/pages/ManagerDashboard/CreateGameListPage.dart';
 import 'package:saving_jim/views/pages/ManagerDashboard/EditChildListPage.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:meta/meta.dart';
@@ -44,6 +41,6 @@ class EditChildViewModel extends Model {
   }
 
   void createGame(User root, BuildContext context) {
-    //
+    //TODO
   }
 }

@@ -36,7 +36,6 @@ class _AccountEditorPageState extends State<AccountEditorPage> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO
     widget.viewModel.fetchCurrentUser();
     return new MaterialApp(
       theme: ThemedApp.getThemeData(),
@@ -83,10 +82,11 @@ class _AccountEditorPageState extends State<AccountEditorPage> {
                           decoration: BoxDecoration(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(3)),
-                              color: Color(0xFFF2F2F2)),
+                              color: Theme.of(context).primaryColorDark),
                           child: Theme(
                               data: Theme.of(context).copyWith(
-                                  canvasColor: Theme.of(context).accentColor,
+                                  canvasColor:
+                                      Theme.of(context).primaryColorDark,
                                   buttonTheme: ButtonTheme.of(context).copyWith(
                                     alignedDropdown: true,
                                   )),

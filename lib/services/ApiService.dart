@@ -4,7 +4,6 @@ import 'package:saving_jim/models/Category.dart';
 import 'package:saving_jim/models/Game.dart';
 import 'package:saving_jim/models/Habit.dart';
 import 'package:saving_jim/models/Statistic.dart';
-import 'package:saving_jim/views/pages/ChildDashboard/GameListPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:saving_jim/services/IApiService.dart';
 import 'package:saving_jim/models/User.dart';
@@ -33,7 +32,6 @@ class ApiService implements IApiService {
     if (body['success']) {
       await sharedPreferences.setString('token', body['token']);
       await sharedPreferences.setString('user', jsonEncode(body['user']));
-      print(body.toString());
       return new User.fromJson(body['user']);
     } else {
       await sharedPreferences.setString('token', null);
@@ -70,7 +68,6 @@ class ApiService implements IApiService {
     httpClient.close();
     final body = jsonDecode(reply);
     if (body['success']) {
-      print('User created!');
       return true;
     } else {
       return false;
@@ -95,12 +92,10 @@ class ApiService implements IApiService {
     HttpClientResponse response = await request.close();
 
     String reply = await response.transform(utf8.decoder).join();
-    // print(reply);
+
     httpClient.close();
     final body = json.decode(reply);
     if (body != null) {
-      //print('Users fetched!');
-      print(body.toString());
       Iterable i = body;
       List<User> myThing =
           (jsonDecode(reply) as List).map((e) => new User.fromJson(e)).toList();
@@ -135,7 +130,6 @@ class ApiService implements IApiService {
     httpClient.close();
     final body = jsonDecode(reply);
     if (body['success']) {
-      print('Done');
       return true;
     } else {
       return false;
@@ -169,7 +163,6 @@ class ApiService implements IApiService {
     httpClient.close();
     final body = jsonDecode(reply);
     if (body['success']) {
-      print('Done');
       return true;
     } else {
       return false;
@@ -184,7 +177,9 @@ class ApiService implements IApiService {
     }
   }
 
-  Future<List<Game>> fetchGames(int typeInt) {}
+  Future<List<Game>> fetchGames(int typeInt) {
+    return null;
+  }
 
   List<Category> fetchCategories() {
     List<Category> ret = new List<Category>();
@@ -221,7 +216,6 @@ class ApiService implements IApiService {
     httpClient.close();
     final body = json.decode(reply);
     if (body != null) {
-      print(body.toString());
       Iterable i = body;
       List<Statistic> myThing = (jsonDecode(reply) as List)
           .map((e) => new Statistic.fromJson(e))

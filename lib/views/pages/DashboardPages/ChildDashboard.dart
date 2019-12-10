@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:saving_jim/utils/ThemedApp.dart';
-import 'package:saving_jim/view_models/ChildDashboardViewModel.dart';
+import 'package:saving_jim/view_models/Dashboards/ChildDashboardViewModel.dart';
 import 'package:saving_jim/views/pages/ChildDashboard/GamesPage.dart';
 import 'package:saving_jim/views/pages/Login/LoginPage.dart';
 
@@ -47,7 +47,7 @@ class _ChildDashboardState extends State<ChildDashboard> {
                     begin: Alignment.topRight,
                     end: Alignment.bottomLeft,
                     stops: [0.1, 0.5, 0.7, 0.9],
-                    colors: ThemedApp.secondaryGradient,
+                    colors: ThemedApp.primaryGradientChild,
                   ),
                 ),
                 child: ListTile(
@@ -79,7 +79,7 @@ class _ChildDashboardState extends State<ChildDashboard> {
                     begin: Alignment.topRight,
                     end: Alignment.bottomLeft,
                     stops: [0.1, 0.5, 0.7, 0.9],
-                    colors: ThemedApp.secondaryGradient,
+                    colors: ThemedApp.secondaryGradientChild,
                   ),
                 ),
                 child: ListTile(

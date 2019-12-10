@@ -1,5 +1,6 @@
 /* Authors: Gauthier Grandhenry Cyril HENNEN Marcin Krasowski */
 import 'package:flutter/material.dart';
+import 'package:saving_jim/view_models/Dashboards/ManagerDashboardViewModel.dart';
 import 'package:saving_jim/view_models/NavigationHandler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'view_models/NavigationHandler.dart';
@@ -8,7 +9,6 @@ import 'views/pages/Login/LoginPage.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'view_models/LoginPageViewModel.dart';
-import 'view_models/ManagerDashboardViewModel.dart';
 import 'services/ApiService.dart';
 import 'package:meta/meta.dart';
 import 'models/User.dart';

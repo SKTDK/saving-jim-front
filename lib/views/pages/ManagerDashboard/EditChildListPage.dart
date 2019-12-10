@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:saving_jim/models/User.dart';
-import 'package:saving_jim/view_models/ManagerDashboard/CreateGameViewModel.dart';
 import 'package:saving_jim/view_models/ManagerDashboard/EditChildViewModel.dart';
-import 'package:saving_jim/views/widgets/ChildListItem.dart';
 import 'package:saving_jim/views/widgets/EditChildListItem.dart';
 
 class EditChildListPage extends StatefulWidget {

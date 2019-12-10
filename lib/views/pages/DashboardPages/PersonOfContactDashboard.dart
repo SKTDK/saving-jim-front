@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:saving_jim/view_models/Dashboards/PersonOfContactDashboardViewModel.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:saving_jim/view_models/PersonOfContactDashboardViewModel.dart';
 
 class PersonOfContactDashboard extends StatefulWidget {
   final PersonOfContactDashboardViewModel viewModel;
