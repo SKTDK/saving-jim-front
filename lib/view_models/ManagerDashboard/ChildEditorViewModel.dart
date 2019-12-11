@@ -85,13 +85,6 @@ class ChildEditorViewModel extends Model {
       );
     } else if (root.length > 1) {
       users = root;
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ScopedModel<ChildEditorViewModel>(
-              model: this, child: EditChildListPage(viewModel: this)),
-        ),
-      );
     }
   }
 }

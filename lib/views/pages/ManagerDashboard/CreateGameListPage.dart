@@ -76,6 +76,7 @@ class CreateGame extends State<CreateGameListPage> {
                         .then((result) {
                       if (result != null) {
                         widget.viewModel.redirect(context, result);
+                        setState(() {});
                       } else {
                         _displaySnackBar(context, 'Aucun résultat trouvé');
                       }
