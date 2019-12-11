@@ -74,7 +74,7 @@ class _AdministratorDashboardState extends State<AdministratorDashboard> {
                       height: 100,
                       child: Center(
                         child: Text(
-                          'Créer un compte accompagnateur',
+                          'Créer compte accompagnateur',
                           style: Theme.of(context).textTheme.title,
                         ),
                       ),

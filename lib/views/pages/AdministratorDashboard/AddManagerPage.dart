@@ -68,13 +68,13 @@ class _AddManagerPageState extends State<AddManagerPage>
                 SizedBox(
                   height: ScreenUtil.getInstance().setHeight(60),
                 ),
-                Text("Prénom", style: Theme.of(context).textTheme.body1),
+                Text("Prénom:", style: Theme.of(context).textTheme.body1),
                 TextField(
                   style: new TextStyle(color: Colors.white),
                   textAlign: TextAlign.center,
                   controller: firstnameController,
                   decoration: InputDecoration(
-                    hintText: "John",
+                    hintText: "...",
                     hintStyle: TextStyle(color: Colors.white),
                     enabledBorder: new UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.white, width: 1.0),
@@ -87,13 +87,13 @@ class _AddManagerPageState extends State<AddManagerPage>
                 SizedBox(
                   height: ScreenUtil.getInstance().setHeight(30),
                 ),
-                Text("Nom", style: Theme.of(context).textTheme.body1),
+                Text("Nom:", style: Theme.of(context).textTheme.body1),
                 TextField(
                   style: new TextStyle(color: Colors.white),
                   textAlign: TextAlign.center,
                   controller: lastnameController,
                   decoration: InputDecoration(
-                    hintText: "Doe",
+                    hintText: "...",
                     hintStyle: TextStyle(color: Colors.white),
                     enabledBorder: new UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.white, width: 1.0),
@@ -106,14 +106,14 @@ class _AddManagerPageState extends State<AddManagerPage>
                 SizedBox(
                   height: ScreenUtil.getInstance().setHeight(30),
                 ),
-                Text("Nom d'utilisateur",
+                Text("Nom d'utilisateur:",
                     style: Theme.of(context).textTheme.body1),
                 TextField(
                   style: new TextStyle(color: Colors.white),
                   textAlign: TextAlign.center,
                   controller: usernameController,
                   decoration: InputDecoration(
-                    hintText: "johndoe",
+                    hintText: "...",
                     hintStyle: TextStyle(color: Colors.white),
                     enabledBorder: new UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.white, width: 1.0),
@@ -126,14 +126,14 @@ class _AddManagerPageState extends State<AddManagerPage>
                 SizedBox(
                   height: ScreenUtil.getInstance().setHeight(30),
                 ),
-                Text("Mot de passe", style: Theme.of(context).textTheme.body1),
+                Text("Mot de passe:", style: Theme.of(context).textTheme.body1),
                 TextField(
                   style: new TextStyle(color: Colors.white),
                   textAlign: TextAlign.center,
                   controller: passwordController,
                   obscureText: true,
                   decoration: InputDecoration(
-                    hintText: "Mot de passe",
+                    hintText: "...",
                     hintStyle: TextStyle(color: Colors.white),
                     enabledBorder: new UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.white, width: 1.0),
@@ -165,18 +165,29 @@ class _AddManagerPageState extends State<AddManagerPage>
                         textColor: Colors.white,
                         padding: const EdgeInsets.all(0.0),
                         child: Container(
-                          width: 300,
+                          width: MediaQuery.of(context).orientation ==
+                                  Orientation.portrait
+                              ? 100
+                              : 300,
+                          height: MediaQuery.of(context).orientation ==
+                                  Orientation.portrait
+                              ? 41
+                              : 55,
                           decoration: new BoxDecoration(
-                              gradient: new LinearGradient(
-                            colors: [
-                              Color.fromARGB(255, 148, 231, 225),
-                              Color.fromARGB(255, 62, 182, 226)
-                            ],
-                          )),
+                            gradient: new LinearGradient(
+                              colors: ThemedApp.buttonSwatch,
+                            ),
+                          ),
                           padding: const EdgeInsets.all(10.0),
-                          child: Text(
-                            "Sauvegarder",
-                            textAlign: TextAlign.center,
+                          child: Center(
+                            child: Text(
+                              "Sauvegarder",
+                              textAlign: TextAlign.center,
+                              style: MediaQuery.of(context).orientation ==
+                                      Orientation.portrait
+                                  ? Theme.of(context).textTheme.display2
+                                  : Theme.of(context).textTheme.body2,
+                            ),
                           ),
                         ),
                       ),

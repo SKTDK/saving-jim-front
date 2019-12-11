@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:saving_jim/utils/ThemedApp.dart';
 import 'package:saving_jim/views/widgets/AccounStateListItem.dart';
 import 'package:saving_jim/view_models/AdministratorDashboard/AccountStateViewModel.dart';
 
@@ -26,23 +28,10 @@ class AccountState extends State<AccountStateListPage> {
     );
   }
 
-// First we build the Menu Wrapped in a ListView Widget
-// Here we set the styling of our Menu rows/entries
-  // Widget _buildMenu() {
-  //   return ListView.separated(
-  //       separatorBuilder: (context, index) =>
-  //           Divider(color: Colors.black45, thickness: 2.0, height: 0),
-  //       itemBuilder: (BuildContext context, int index) => Center(
-  //             child: AccountStateListItem(
-  //                 widget.viewModel.users[index], widget.viewModel),
-  //           ),
-  //       itemCount:
-  //           widget.viewModel.users == null ? 0 : widget.viewModel.users.length);
-  // }
-
-  // First we build the Menu Wrapped in a ListView Widget
-// Here we set the styling of our Menu rows/entries
   Widget _buildMenu() {
+    ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
+    ScreenUtil.instance =
+        ScreenUtil(width: 1000, height: 1334, allowFontScaling: true);
     return Builder(
       builder: (context) => new Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -57,8 +46,8 @@ class AccountState extends State<AccountStateListPage> {
                 colors: [
                   Colors.black,
                   Colors.black87,
-                  Colors.black54,
-                  Colors.black45,
+                  Colors.black87,
+                  Colors.black87,
                 ],
               ),
             ),
@@ -74,7 +63,7 @@ class AccountState extends State<AccountStateListPage> {
                       textAlign: TextAlign.center,
                       controller: searchController,
                       decoration: InputDecoration(
-                        hintText: "Recherche",
+                        hintText: "...",
                         hintStyle: TextStyle(color: Colors.white),
                       ),
                     ),
@@ -98,18 +87,29 @@ class AccountState extends State<AccountStateListPage> {
                     textColor: Colors.white,
                     padding: const EdgeInsets.all(0.0),
                     child: Container(
-                      width: 200,
+                      width: MediaQuery.of(context).orientation ==
+                              Orientation.portrait
+                          ? 100
+                          : 300,
+                      height: MediaQuery.of(context).orientation ==
+                              Orientation.portrait
+                          ? 41
+                          : 55,
                       decoration: new BoxDecoration(
-                          gradient: new LinearGradient(
-                        colors: [
-                          Color.fromARGB(255, 148, 231, 225),
-                          Color.fromARGB(255, 62, 182, 226)
-                        ],
-                      )),
+                        gradient: new LinearGradient(
+                          colors: ThemedApp.buttonSwatch,
+                        ),
+                      ),
                       padding: const EdgeInsets.all(10.0),
-                      child: Text(
-                        "Rechercher",
-                        textAlign: TextAlign.center,
+                      child: Center(
+                        child: Text(
+                          "Recherche",
+                          textAlign: TextAlign.center,
+                          style: MediaQuery.of(context).orientation ==
+                                  Orientation.portrait
+                              ? Theme.of(context).textTheme.display2
+                              : Theme.of(context).textTheme.body2,
+                        ),
                       ),
                     ),
                   ),

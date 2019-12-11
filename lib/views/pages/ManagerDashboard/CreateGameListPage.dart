@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:saving_jim/utils/ThemedApp.dart';
 import 'package:saving_jim/view_models/ManagerDashboard/CreateGameViewModel.dart';
 import 'package:saving_jim/views/widgets/ChildListItem.dart';
 import 'package:saving_jim/views/widgets/EditChildListItem.dart';
@@ -44,8 +45,8 @@ class CreateGame extends State<CreateGameListPage> {
               colors: [
                 Colors.black,
                 Colors.black87,
-                Colors.black54,
-                Colors.black45,
+                Colors.black87,
+                Colors.black87,
               ],
             ),
           ),
@@ -61,7 +62,7 @@ class CreateGame extends State<CreateGameListPage> {
                     textAlign: TextAlign.center,
                     controller: searchController,
                     decoration: InputDecoration(
-                      hintText: "Recherche",
+                      hintText: "...",
                       hintStyle: TextStyle(color: Colors.white),
                     ),
                   ),
@@ -85,18 +86,29 @@ class CreateGame extends State<CreateGameListPage> {
                   textColor: Colors.white,
                   padding: const EdgeInsets.all(0.0),
                   child: Container(
-                    width: 200,
+                    width: MediaQuery.of(context).orientation ==
+                            Orientation.portrait
+                        ? 100
+                        : 300,
+                    height: MediaQuery.of(context).orientation ==
+                            Orientation.portrait
+                        ? 41
+                        : 55,
                     decoration: new BoxDecoration(
-                        gradient: new LinearGradient(
-                      colors: [
-                        Color.fromARGB(255, 148, 231, 225),
-                        Color.fromARGB(255, 62, 182, 226)
-                      ],
-                    )),
+                      gradient: new LinearGradient(
+                        colors: ThemedApp.buttonSwatch,
+                      ),
+                    ),
                     padding: const EdgeInsets.all(10.0),
-                    child: Text(
-                      "Rechercher",
-                      textAlign: TextAlign.center,
+                    child: Center(
+                      child: Text(
+                        "Recherche",
+                        textAlign: TextAlign.center,
+                        style: MediaQuery.of(context).orientation ==
+                                Orientation.portrait
+                            ? Theme.of(context).textTheme.display2
+                            : Theme.of(context).textTheme.body2,
+                      ),
                     ),
                   ),
                 ),

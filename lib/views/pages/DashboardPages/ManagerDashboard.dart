@@ -158,7 +158,6 @@ class _ManagerDashboardState extends State<ManagerDashboard> {
                   ),
                 ),
               ),
-              Divider(color: Colors.black, height: 0),
             ],
           ),
         ),

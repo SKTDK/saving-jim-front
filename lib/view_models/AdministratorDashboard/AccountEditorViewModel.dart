@@ -14,26 +14,19 @@ class AccountEditorViewModel extends Model {
   final ApiService apiSvc;
   AccountEditorViewModel({@required this.apiSvc});
 
-  // fetch account list
+  User selectedUser;
   List<User> users;
+  int selectedAccountType;
+  User currentUser;
 
-  // gets the current user
-  User _currentUser;
-  User get currentUser => _currentUser;
-
-  set currentUser(User value) {
-    _currentUser = value;
-    notifyListeners();
-  }
-
-  void fetchCurrentUser() async {
+  Future<User> fetchCurrentUser() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    currentUser =
+    this.currentUser =
         new User.fromJson(jsonDecode(sharedPreferences.getString('user')));
-    notifyListeners();
+    return currentUser;
   }
 
-  Future<List<User>> fetchUsers(String accountType) async {
+  void fetchUsers(BuildContext context, String accountType) async {
     int accountTypeInt;
     switch (accountType) {
       case 'Accompagnateur':
@@ -46,28 +39,22 @@ class AccountEditorViewModel extends Model {
         accountTypeInt = constants.PERSONOFCONTACT_ACCOUNT_TYPE;
         break;
     }
-    return apiSvc.fetchUsers(accountTypeInt);
-  }
-
-  void displayList(BuildContext context, String accountType) async {
-    await fetchUsers(accountType).then((result) async {
+    selectedAccountType = accountTypeInt;
+    apiSvc.fetchUsers(accountTypeInt).then((result) {
       users = result;
-      await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ScopedModel<AccountEditorViewModel>(
-              model: this, child: AccountEditorListPage(viewModel: this)),
-        ),
-      );
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => AccountEditorListPage(viewModel: this)));
     });
   }
 
-  User _selectedUser;
-  User get selectedUser => _selectedUser;
+  Future<List<User>> fetchSearchResult(String text) async {
+    return apiSvc.fetchSearchResult(selectedAccountType, text);
+  }
 
-  set selectedUser(User value) {
-    _selectedUser = value;
-    notifyListeners();
+  Future<List<User>> search(BuildContext context, String text) {
+    return fetchSearchResult(text);
   }
 
   void editUser(BuildContext context, User root) async {
@@ -89,6 +76,10 @@ class AccountEditorViewModel extends Model {
     if (newFirstname == null && newLastname == null && newPassword == null) {
       return false;
     }
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    ;
+    User currentUser =
+        new User.fromJson(jsonDecode(sharedPreferences.getString('user')));
     bool ret = await apiSvc.updateAccount(currentUser.accountType,
         currentUser.id, newFirstname, newLastname, newPassword);
 
@@ -97,7 +88,7 @@ class AccountEditorViewModel extends Model {
       if (newLastname != null) currentUser.lastname = newLastname;
       SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
-      sharedPreferences.setString('user', jsonEncode(_currentUser));
+      sharedPreferences.setString('user', jsonEncode(currentUser));
     }
     return ret;
   }
@@ -110,7 +101,7 @@ class AccountEditorViewModel extends Model {
     if (newFirstname == null && newLastname == null && newPassword == null) {
       return false;
     }
-    bool ret = await apiSvc.updateAccount(currentUser.accountType,
+    bool ret = await apiSvc.updateAccount(selectedUser.accountType,
         selectedUser.id, newFirstname, newLastname, newPassword);
 
     if (ret) {
@@ -118,5 +109,21 @@ class AccountEditorViewModel extends Model {
       if (newLastname != null) selectedUser.lastname = newLastname;
     }
     return ret;
+  }
+
+  void redirect(BuildContext context, List<User> root) {
+    print('root.length');
+    if (root.length == 1) {
+      selectedUser = root[0];
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ScopedModel<AccountEditorViewModel>(
+              model: this, child: UserAccountEditorPage(viewModel: this)),
+        ),
+      );
+    } else if (root.length > 1) {
+      users = root;
+    }
   }
 }

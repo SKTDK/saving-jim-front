@@ -74,7 +74,7 @@ class _AddChildPageState extends State<AddChildPage>
                   textAlign: TextAlign.center,
                   controller: firstnameController,
                   decoration: InputDecoration(
-                    hintText: "John",
+                    hintText: "...",
                     hintStyle: TextStyle(color: Colors.white),
                     enabledBorder: new UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.white, width: 1.0),
@@ -93,7 +93,7 @@ class _AddChildPageState extends State<AddChildPage>
                   textAlign: TextAlign.center,
                   controller: lastnameController,
                   decoration: InputDecoration(
-                    hintText: "Doe",
+                    hintText: "...",
                     hintStyle: TextStyle(color: Colors.white),
                     enabledBorder: new UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.white, width: 1.0),
@@ -113,7 +113,7 @@ class _AddChildPageState extends State<AddChildPage>
                   textAlign: TextAlign.center,
                   controller: usernameController,
                   decoration: InputDecoration(
-                    hintText: "johndoe",
+                    hintText: "...",
                     hintStyle: TextStyle(color: Colors.white),
                     enabledBorder: new UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.white, width: 1.0),
@@ -133,7 +133,7 @@ class _AddChildPageState extends State<AddChildPage>
                   controller: passwordController,
                   obscureText: true,
                   decoration: InputDecoration(
-                    hintText: "Mot de passe",
+                    hintText: "...",
                     hintStyle: TextStyle(color: Colors.white),
                     enabledBorder: new UnderlineInputBorder(
                       borderSide: BorderSide(color: Colors.white, width: 1.0),
@@ -164,18 +164,29 @@ class _AddChildPageState extends State<AddChildPage>
                         textColor: Colors.white,
                         padding: const EdgeInsets.all(0.0),
                         child: Container(
-                          width: 300,
+                          width: MediaQuery.of(context).orientation ==
+                                  Orientation.portrait
+                              ? 100
+                              : 300,
+                          height: MediaQuery.of(context).orientation ==
+                                  Orientation.portrait
+                              ? 41
+                              : 55,
                           decoration: new BoxDecoration(
-                              gradient: new LinearGradient(
-                            colors: [
-                              Color.fromARGB(255, 148, 231, 225),
-                              Color.fromARGB(255, 62, 182, 226)
-                            ],
-                          )),
+                            gradient: new LinearGradient(
+                              colors: ThemedApp.buttonSwatch,
+                            ),
+                          ),
                           padding: const EdgeInsets.all(10.0),
-                          child: Text(
-                            "Sauvegarder",
-                            textAlign: TextAlign.center,
+                          child: Center(
+                            child: Text(
+                              "Sauvegarder",
+                              textAlign: TextAlign.center,
+                              style: MediaQuery.of(context).orientation ==
+                                      Orientation.portrait
+                                  ? Theme.of(context).textTheme.display2
+                                  : Theme.of(context).textTheme.body2,
+                            ),
                           ),
                         ),
                       ),

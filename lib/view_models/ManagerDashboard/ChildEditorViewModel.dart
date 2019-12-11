@@ -13,13 +13,6 @@ class ChildEditorViewModel extends Model {
 
   List<User> users;
 
-  void changeState(User root) {
-    apiSvc.changeAccountState(root).then((res) {
-      root.active = !root.active;
-      notifyListeners();
-    });
-  }
-
   void fetchChildren(BuildContext context) async {
     apiSvc.fetchUsers(constants.CHILD_ACCOUNT_TYPE).then((result) {
       users = result;

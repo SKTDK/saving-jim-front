@@ -51,14 +51,9 @@ class AccountStateItem extends State<AccountStateListItem> {
           width: MediaQuery.of(context).size.width,
           height: 100,
           child: Center(
-            child: Text(
-              root.username == null ? "undefined" : root.username,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 40,
-                letterSpacing: .09,
-              ),
-            ),
+            child: Text(root.username == null ? "undefined" : root.username,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.title),
           ),
         ),
       ),

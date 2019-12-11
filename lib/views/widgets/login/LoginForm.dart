@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:saving_jim/utils/ThemedApp.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:saving_jim/view_models/LoginPageViewModel.dart';
 
@@ -52,8 +53,8 @@ class _LoginFormState extends State<LoginForm> {
                 SizedBox(
                   height: 30,
                 ),
-                Text("Nom d'utilisateur",
-                    style: Theme.of(context).textTheme.body2),
+                Text("Nom d'utilisateur:",
+                    style: Theme.of(context).textTheme.display1),
                 TextField(
                   controller: usernameController,
                   decoration: InputDecoration(
@@ -63,7 +64,8 @@ class _LoginFormState extends State<LoginForm> {
                 SizedBox(
                   height: 30,
                 ),
-                Text("Mot de passe", style: Theme.of(context).textTheme.body2),
+                Text("Mot de passe:",
+                    style: Theme.of(context).textTheme.display1),
                 TextField(
                   controller: passwordController,
                   obscureText: true,
@@ -88,18 +90,29 @@ class _LoginFormState extends State<LoginForm> {
                       textColor: Colors.white,
                       padding: const EdgeInsets.all(0.0),
                       child: Container(
-                        width: 300,
+                        width: MediaQuery.of(context).orientation ==
+                                Orientation.portrait
+                            ? 100
+                            : 300,
+                        height: MediaQuery.of(context).orientation ==
+                                Orientation.portrait
+                            ? 41
+                            : 55,
                         decoration: new BoxDecoration(
-                            gradient: new LinearGradient(
-                          colors: [
-                            Color.fromARGB(255, 148, 231, 225),
-                            Color.fromARGB(255, 62, 182, 226)
-                          ],
-                        )),
+                          gradient: new LinearGradient(
+                            colors: ThemedApp.buttonSwatch,
+                          ),
+                        ),
                         padding: const EdgeInsets.all(10.0),
-                        child: Text(
-                          "Connexion",
-                          textAlign: TextAlign.center,
+                        child: Center(
+                          child: Text(
+                            "Connexion",
+                            textAlign: TextAlign.center,
+                            style: MediaQuery.of(context).orientation ==
+                                    Orientation.portrait
+                                ? Theme.of(context).textTheme.display2
+                                : Theme.of(context).textTheme.body2,
+                          ),
                         ),
                       ),
                     ),

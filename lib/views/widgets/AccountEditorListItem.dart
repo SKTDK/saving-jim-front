@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:saving_jim/utils/ThemedApp.dart';
 import 'package:saving_jim/view_models/AdministratorDashboard/AccountEditorViewModel.dart';
-import 'package:scoped_model/scoped_model.dart';
 import 'package:saving_jim/models/User.dart';
 
 // This is the design of a single user item within the accountstate page
