@@ -107,7 +107,7 @@ class _AccountStatePageState extends State<AccountStatePage> {
                                       selectedAccountType = value;
                                       // callback on the function
 
-                                      widget.viewModel.displayList(
+                                      widget.viewModel.fetchUsers(
                                           context, selectedAccountType);
                                     });
                                   },

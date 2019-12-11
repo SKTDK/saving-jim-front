@@ -14,6 +14,7 @@ class CreateGameViewModel extends Model {
   final ApiService apiSvc;
   CreateGameViewModel({@required this.apiSvc});
   final GameViewModel gameViewModel = GameViewModel(apiSvc: ApiService());
+
   List<User> users;
 
   void fetchChildren(BuildContext context) async {

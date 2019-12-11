@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:saving_jim/views/widgets/AccountEditorItem.dart';
+import 'package:saving_jim/views/widgets/AccountEditorListItem.dart';
 import 'package:saving_jim/view_models/AdministratorDashboard/AccountEditorViewModel.dart';
 
 class AccountEditorListPage extends StatefulWidget {
@@ -30,7 +30,7 @@ class AccountEditor extends State<AccountEditorListPage> {
         separatorBuilder: (context, index) =>
             Divider(color: Colors.black45, thickness: 2.0, height: 0),
         itemBuilder: (BuildContext context, int index) => Center(
-              child: AccountEditorItem(
+              child: AccountEditorListItem(
                   index, widget.viewModel.users[index], widget.viewModel),
             ),
         itemCount:

@@ -10,7 +10,8 @@ class AccountStateViewModel extends Model {
   final ApiService apiSvc;
   AccountStateViewModel({@required this.apiSvc});
   List<User> users;
-  Future<List<User>> fetchUsers(String accountType) async {
+  int selectedAccountType;
+  void fetchUsers(BuildContext context, String accountType) async {
     int accountTypeInt;
     switch (accountType) {
       case 'Accompagnateur':
@@ -23,26 +24,32 @@ class AccountStateViewModel extends Model {
         accountTypeInt = constants.PERSONOFCONTACT_ACCOUNT_TYPE;
         break;
     }
-    return apiSvc.fetchUsers(accountTypeInt);
-  }
-
-  displayList(BuildContext context, String accountType) {
-    fetchUsers(accountType).then((result) async {
+    selectedAccountType = accountTypeInt;
+    apiSvc.fetchUsers(accountTypeInt).then((result) {
       users = result;
-      await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ScopedModel<AccountStateViewModel>(
-              model: this, child: AccountStateListPage(viewModel: this)),
-        ),
-      );
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => AccountStateListPage(viewModel: this)));
     });
   }
 
-  void changeState(User root) {
-    apiSvc.changeAccountState(root).then((res) {
+  void redirect(BuildContext context, List<User> root) {
+    users = root;
+  }
+
+  Future<bool> changeState(User root) {
+    return apiSvc.changeAccountState(root).then((res) {
       root.active = !root.active;
-      notifyListeners();
+      return res;
     });
+  }
+
+  Future<List<User>> fetchSearchResult(String text) async {
+    return apiSvc.fetchSearchResult(selectedAccountType, text);
+  }
+
+  Future<List<User>> search(BuildContext context, String text) {
+    return fetchSearchResult(text);
   }
 }
