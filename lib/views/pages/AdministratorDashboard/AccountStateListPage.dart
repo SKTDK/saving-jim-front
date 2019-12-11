@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:saving_jim/models/User.dart';
 import 'package:saving_jim/views/widgets/AccountTypeItem.dart';
 import 'package:saving_jim/view_models/AdministratorDashboard/AccountStateViewModel.dart';
 
 class AccountStateListPage extends StatefulWidget {
   final AccountStateViewModel viewModel;
-  final List<User> list;
-  AccountStateListPage(
-      {Key key, @required this.viewModel, Key key2, @required this.list})
-      : super(key: key);
+  AccountStateListPage({Key key, @required this.viewModel}) : super(key: key);
 
   @override
   AccountState createState() => AccountState();
 }
 
 class AccountState extends State<AccountStateListPage> {
-  List<User> list;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -35,8 +30,10 @@ class AccountState extends State<AccountStateListPage> {
         separatorBuilder: (context, index) =>
             Divider(color: Colors.black45, thickness: 2.0, height: 0),
         itemBuilder: (BuildContext context, int index) => Center(
-              child: AccountTypeItem(widget.list[index], widget.viewModel),
+              child: AccountTypeItem(
+                  widget.viewModel.users[index], widget.viewModel),
             ),
-        itemCount: widget.list == null ? 0 : widget.list.length);
+        itemCount:
+            widget.viewModel.users == null ? 0 : widget.viewModel.users.length);
   }
 }

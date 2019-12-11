@@ -82,7 +82,6 @@ class _AdministratorDashboardState extends State<AdministratorDashboard> {
                   ),
                 ),
               ),
-              Divider(color: Colors.black, height: 0),
               Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -112,7 +111,6 @@ class _AdministratorDashboardState extends State<AdministratorDashboard> {
                   ),
                 ),
               ),
-              Divider(color: Colors.black, height: 0),
               Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -149,7 +147,6 @@ class _AdministratorDashboardState extends State<AdministratorDashboard> {
                   ),
                 ),
               ),
-              Divider(color: Colors.black, height: 0),
               Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -181,7 +178,6 @@ class _AdministratorDashboardState extends State<AdministratorDashboard> {
                   ),
                 ),
               ),
-              Divider(color: Colors.black, height: 0),
               Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(

@@ -9,14 +9,7 @@ import 'package:saving_jim/utils/constants.dart' as constants;
 class AccountStateViewModel extends Model {
   final ApiService apiSvc;
   AccountStateViewModel({@required this.apiSvc});
-
-  Future<List<User>> _users;
-  Future<List<User>> get users => _users;
-  set users(Future<List<User>> value) {
-    _users = value;
-    notifyListeners();
-  }
-
+  List<User> users;
   Future<List<User>> fetchUsers(String accountType) async {
     int accountTypeInt;
     switch (accountType) {
@@ -30,18 +23,17 @@ class AccountStateViewModel extends Model {
         accountTypeInt = constants.PERSONOFCONTACT_ACCOUNT_TYPE;
         break;
     }
-    _users = apiSvc.fetchUsers(accountTypeInt);
-    return _users;
+    return apiSvc.fetchUsers(accountTypeInt);
   }
 
-  void displayList(BuildContext context, String accountType) async {
-    await fetchUsers(accountType).then((result) async {
+  displayList(BuildContext context, String accountType) {
+    fetchUsers(accountType).then((result) async {
+      users = result;
       await Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => ScopedModel<AccountStateViewModel>(
-              model: this,
-              child: AccountStateListPage(viewModel: this, list: result)),
+              model: this, child: AccountStateListPage(viewModel: this)),
         ),
       );
     });

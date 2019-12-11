@@ -15,12 +15,7 @@ class AccountEditorViewModel extends Model {
   AccountEditorViewModel({@required this.apiSvc});
 
   // fetch account list
-  Future<List<User>> _users;
-  Future<List<User>> get users => _users;
-  set users(Future<List<User>> value) {
-    _users = value;
-    notifyListeners();
-  }
+  List<User> users;
 
   // gets the current user
   User _currentUser;
@@ -51,19 +46,17 @@ class AccountEditorViewModel extends Model {
         accountTypeInt = constants.PERSONOFCONTACT_ACCOUNT_TYPE;
         break;
     }
-    //TODO
-    users = apiSvc.fetchUsers(accountTypeInt);
-    return _users;
+    return apiSvc.fetchUsers(accountTypeInt);
   }
 
   void displayList(BuildContext context, String accountType) async {
     await fetchUsers(accountType).then((result) async {
+      users = result;
       await Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => ScopedModel<AccountEditorViewModel>(
-              model: this,
-              child: AccountEditorListPage(viewModel: this, list: result)),
+              model: this, child: AccountEditorListPage(viewModel: this)),
         ),
       );
     });
