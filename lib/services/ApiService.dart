@@ -137,9 +137,10 @@ class ApiService implements IApiService {
   }
 
   // change account state
-  Future<bool> updateAccount(int currentId, String newFirstname,
-      String newLastname, String newPassword) async {
+  Future<bool> updateAccount(int targetAccountType, int currentId,
+      String newFirstname, String newLastname, String newPassword) async {
     Map map = {
+      'accountType': targetAccountType,
       'id': currentId,
       'firstname': newFirstname,
       'lastname': newLastname,
@@ -235,5 +236,34 @@ class ApiService implements IApiService {
         .getHabits()
         .where((i) => i.categoryId == categoryId.toString())
         .toList();
+  }
+
+  Future<User> fetchSearchResult(int accountType, String text) async {
+    Map map = {'accountType': accountType, 'text': text};
+
+    String url = _remote() + "/accounts/search";
+
+    HttpClient httpClient = new HttpClient();
+    HttpClientRequest request = await httpClient.postUrl(Uri.parse(url));
+    request.headers.set('content-type', 'application/json; charset=utf-8');
+    // auth with jwt token
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    request.headers.set('authorization', sharedPreferences.get('token'));
+
+    request.add(utf8.encode(jsonEncode(map)));
+
+    HttpClientResponse response = await request.close();
+
+    String reply = await response.transform(utf8.decoder).join();
+    print(reply);
+    httpClient.close();
+
+    if (response.statusCode == 200) {
+      final body = json.decode(reply);
+      print(response.statusCode);
+      return new User.fromJson(body);
+    } else {
+      return null;
+    }
   }
 }

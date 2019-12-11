@@ -42,7 +42,6 @@ class _ManagerDashboardState extends State<ManagerDashboard> {
                   ),
                 ),
               ),
-              Divider(color: Theme.of(context).primaryColor, height: 0),
               Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -74,7 +73,6 @@ class _ManagerDashboardState extends State<ManagerDashboard> {
                   ),
                 ),
               ),
-              Divider(color: Theme.of(context).primaryColor, height: 0),
               Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -106,7 +104,6 @@ class _ManagerDashboardState extends State<ManagerDashboard> {
                   ),
                 ),
               ),
-              Divider(color: Theme.of(context).primaryColor, height: 0),
               Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -138,7 +135,6 @@ class _ManagerDashboardState extends State<ManagerDashboard> {
                   ),
                 ),
               ),
-              Divider(color: Colors.black, height: 0),
               Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(

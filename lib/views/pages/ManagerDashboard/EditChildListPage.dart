@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:saving_jim/view_models/ManagerDashboard/EditChildViewModel.dart';
+import 'package:saving_jim/view_models/ManagerDashboard/ChildEditorViewModel.dart';
 import 'package:saving_jim/views/widgets/EditChildListItem.dart';
 
 class EditChildListPage extends StatefulWidget {
-  final EditChildViewModel viewModel;
+  final ChildEditorViewModel viewModel;
 
   EditChildListPage({Key key, @required this.viewModel}) : super(key: key);
 
@@ -12,7 +12,7 @@ class EditChildListPage extends StatefulWidget {
 }
 
 class EditChild extends State<EditChildListPage> {
-  var usernameController = TextEditingController();
+  var searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -63,9 +63,9 @@ class EditChild extends State<EditChildListPage> {
                       child: TextField(
                         style: Theme.of(context).textTheme.title,
                         textAlign: TextAlign.center,
-                        controller: usernameController,
+                        controller: searchController,
                         decoration: InputDecoration(
-                          hintText: "Nom d'utlisateur",
+                          hintText: "Recherche",
                           hintStyle: TextStyle(color: Colors.white),
                         ),
                       ),
@@ -75,7 +75,15 @@ class EditChild extends State<EditChildListPage> {
                     padding: const EdgeInsets.only(right: 50.0),
                     child: RaisedButton(
                       onPressed: () {
-                        //widget.viewModel.search();
+                        widget.viewModel
+                            .search(context, searchController.text)
+                            .then((result) {
+                          if (result != null) {
+                            widget.viewModel.redirect(context, result);
+                          } else {
+                            _displaySnackBar(context);
+                          }
+                        });
                       },
                       textColor: Colors.white,
                       padding: const EdgeInsets.all(0.0),
@@ -114,6 +122,15 @@ class EditChild extends State<EditChildListPage> {
         );
       },
       future: widget.viewModel.fetchChildren(),
+    );
+  }
+
+  _displaySnackBar(BuildContext context) {
+    final scaffold = Scaffold.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content: const Text('Nous n\'avons rien trouvé'),
+      ),
     );
   }
 }

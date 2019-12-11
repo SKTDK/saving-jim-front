@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:saving_jim/utils/ThemedApp.dart';
-import 'package:saving_jim/view_models/AdministratorDashboard/AccountEditorViewModel.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:saving_jim/view_models/ManagerDashboard/ChildEditorViewModel.dart';
 
-class UserAccountEditorPage extends StatefulWidget {
-  final AccountEditorViewModel viewModel;
+class ChildAccountEditorPage extends StatefulWidget {
+  final ChildEditorViewModel viewModel;
 
-  UserAccountEditorPage({Key key, @required this.viewModel}) : super(key: key);
+  ChildAccountEditorPage({Key key, @required this.viewModel}) : super(key: key);
 
   @override
-  _UserAccountEditorPageState createState() => _UserAccountEditorPageState();
+  _ChildAccountEditorPageState createState() => _ChildAccountEditorPageState();
 }
 
-class _UserAccountEditorPageState extends State<UserAccountEditorPage>
+class _ChildAccountEditorPageState extends State<ChildAccountEditorPage>
     with SingleTickerProviderStateMixin {
   var firstnameController = TextEditingController();
   var lastnameController = TextEditingController();
@@ -35,7 +35,7 @@ class _UserAccountEditorPageState extends State<UserAccountEditorPage>
         ScreenUtil(width: 1000, height: 1334, allowFontScaling: true);
     return new Scaffold(
       appBar: AppBar(
-        title: Text('Modifier un compte: ' +
+        title: Text('Modifier un enfant: ' +
             (widget.viewModel.selectedUser == null
                 ? ""
                 : widget.viewModel.selectedUser.username)),

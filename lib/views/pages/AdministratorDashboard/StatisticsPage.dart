@@ -33,7 +33,7 @@ class _StatisticsPageState extends State<StatisticsPage> {
         }
 
         if (projectSnap.connectionState == ConnectionState.waiting) {
-          return new CircularProgressIndicator();
+          return Center(child: CircularProgressIndicator());
         } else {
           return Container(
             width: double.infinity,

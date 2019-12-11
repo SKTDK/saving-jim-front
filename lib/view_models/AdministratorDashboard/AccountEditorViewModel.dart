@@ -89,7 +89,7 @@ class AccountEditorViewModel extends Model {
     if (newFirstname == null && newLastname == null && newPassword == null) {
       return false;
     }
-    bool ret = await apiSvc.updateAccount(
+    bool ret = await apiSvc.updateAccount(currentUser.accountType,
         currentUser.id, newFirstname, newLastname, newPassword);
 
     if (ret) {
@@ -110,7 +110,7 @@ class AccountEditorViewModel extends Model {
     if (newFirstname == null && newLastname == null && newPassword == null) {
       return false;
     }
-    bool ret = await apiSvc.updateAccount(
+    bool ret = await apiSvc.updateAccount(currentUser.accountType,
         selectedUser.id, newFirstname, newLastname, newPassword);
 
     if (ret) {

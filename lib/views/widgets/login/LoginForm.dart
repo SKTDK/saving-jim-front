@@ -26,7 +26,7 @@ class _LoginFormState extends State<LoginForm> {
         builder: (context, child, model) {
       return new Container(
         width: 800,
-        height: displayMode ? 400 : 500,
+        height: displayMode ? 450 : 500,
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(8.0),
@@ -47,7 +47,7 @@ class _LoginFormState extends State<LoginForm> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text("Connexion à Esope BD",
+                Text("Connexion à Esope",
                     style: Theme.of(context).textTheme.subhead),
                 SizedBox(
                   height: 30,

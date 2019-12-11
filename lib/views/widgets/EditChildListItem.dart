@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:saving_jim/models/User.dart';
 import 'package:saving_jim/utils/ThemedApp.dart';
-import 'package:saving_jim/view_models/ManagerDashboard/EditChildViewModel.dart';
+import 'package:saving_jim/view_models/ManagerDashboard/ChildEditorViewModel.dart';
 
 // This is the design of a single user item within the accountstate page
 class EditChildListItem extends StatelessWidget {
   const EditChildListItem(this.index, this.user, this.vm);
   final int index;
   final User user;
-  final EditChildViewModel vm;
+  final ChildEditorViewModel vm;
 
   Widget _buildTiles(User root, BuildContext context) {
     return Container(
@@ -24,7 +24,7 @@ class EditChildListItem extends StatelessWidget {
       ),
       child: ListTile(
         onTap: () {
-          vm.createGame(root, context);
+          vm.editUser(context, root);
         },
         title: Container(
           width: MediaQuery.of(context).size.width,
