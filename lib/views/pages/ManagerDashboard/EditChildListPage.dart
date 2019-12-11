@@ -76,7 +76,7 @@ class EditChild extends State<EditChildListPage> {
                       if (result != null) {
                         widget.viewModel.redirect(context, result);
                       } else {
-                        _displaySnackBar(context, 'Aucun resultat trouvé');
+                        _displaySnackBar(context, 'Aucun résultat trouvé');
                       }
                     });
                   },

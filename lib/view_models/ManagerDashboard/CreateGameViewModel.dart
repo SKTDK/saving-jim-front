@@ -14,43 +14,57 @@ class CreateGameViewModel extends Model {
   final ApiService apiSvc;
   CreateGameViewModel({@required this.apiSvc});
   final GameViewModel gameViewModel = GameViewModel(apiSvc: ApiService());
-  Future<List<User>> _users;
-  Future<List<User>> get users => _users;
-  set users(Future<List<User>> value) {
-    _users = value;
-    notifyListeners();
-  }
+  List<User> users;
 
-  void displayList(BuildContext context, String accountType) async {
-    await fetchChildren().then((result) async {
-      await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ScopedModel<CreateGameViewModel>(
-              model: this, child: CreateGameListPage(viewModel: this)),
-        ),
-      );
+  void fetchChildren(BuildContext context) async {
+    apiSvc.fetchUsers(constants.CHILD_ACCOUNT_TYPE).then((result) {
+      users = result;
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => CreateGameListPage(viewModel: this)));
     });
   }
 
-  void changeState(User root) {
-    apiSvc.changeAccountState(root).then((res) {
-      root.active = !root.active;
-      notifyListeners();
-    });
+  Future<List<User>> fetchSearchResult(String text) async {
+    return apiSvc.fetchSearchResult(constants.CHILD_ACCOUNT_TYPE, text);
   }
 
-  Future<List<User>> fetchChildren() async {
-    _users = apiSvc.fetchUsers(constants.CHILD_ACCOUNT_TYPE);
-    return _users;
+  Future<List<User>> search(BuildContext context, String text) {
+    return fetchSearchResult(text);
   }
+
+  User selectedUser;
+  void editUser(BuildContext context, User root) {}
 
   void createGame(User root, BuildContext context) {
+    selectedUser = root;
     gameViewModel.user = root;
     Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => CategoriesListPage(viewModel: gameViewModel),
         ));
+  }
+
+  void redirect(BuildContext context, List<User> root) {
+    print(root.length);
+    if (root.length == 1) {
+      selectedUser = root[0];
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => CreateGameListPage(viewModel: this),
+        ),
+      );
+    } else if (root.length > 1) {
+      users = root;
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => CreateGameListPage(viewModel: this),
+        ),
+      );
+    }
   }
 }

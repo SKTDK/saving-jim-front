@@ -43,9 +43,9 @@ class ChildEditorViewModel extends Model {
   }
 
   User selectedUser;
-  void editUser(BuildContext context, User root) async {
+  void editUser(BuildContext context, User root) {
     selectedUser = root;
-    await Navigator.push(
+    Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => ScopedModel<ChildEditorViewModel>(
