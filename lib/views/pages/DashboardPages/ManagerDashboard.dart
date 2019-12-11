@@ -84,11 +84,7 @@ class _ManagerDashboardState extends State<ManagerDashboard> {
                 ),
                 child: ListTile(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => EditChildListPage(
-                                viewModel: editChildViewModel)));
+                    editChildViewModel.fetchChildren(context);
                   },
                   title: Center(
                     child: Container(

@@ -11,23 +11,7 @@ class ChildEditorViewModel extends Model {
   final ApiService apiSvc;
   ChildEditorViewModel({@required this.apiSvc});
 
-  Future<List<User>> _users;
-  Future<List<User>> get users => _users;
-  set users(Future<List<User>> value) {
-    _users = value;
-    notifyListeners();
-  }
-
-  void displayList(BuildContext context, String accountType) async {
-    await fetchChildren().then((result) async {
-      await Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => EditChildListPage(viewModel: this),
-        ),
-      );
-    });
-  }
+  List<User> users;
 
   void changeState(User root) {
     apiSvc.changeAccountState(root).then((res) {
@@ -36,20 +20,25 @@ class ChildEditorViewModel extends Model {
     });
   }
 
-  Future<List<User>> fetchChildren() async {
-    _users = apiSvc.fetchUsers(constants.CHILD_ACCOUNT_TYPE);
-    return _users;
+  void fetchChildren(BuildContext context) async {
+    apiSvc.fetchUsers(constants.CHILD_ACCOUNT_TYPE).then((result) {
+      users = result;
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => EditChildListPage(viewModel: this)));
+    });
   }
 
   void createGame(User root, BuildContext context) {
     //TODO
   }
 
-  Future<User> fetchSearchResult(String text) async {
+  Future<List<User>> fetchSearchResult(String text) async {
     return apiSvc.fetchSearchResult(constants.CHILD_ACCOUNT_TYPE, text);
   }
 
-  Future<User> search(BuildContext context, String text) {
+  Future<List<User>> search(BuildContext context, String text) {
     return fetchSearchResult(text);
   }
 
@@ -83,14 +72,26 @@ class ChildEditorViewModel extends Model {
     return ret;
   }
 
-  void redirect(BuildContext context, User root) {
-    selectedUser = root;
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => ScopedModel<ChildEditorViewModel>(
-            model: this, child: ChildAccountEditorPage(viewModel: this)),
-      ),
-    );
+  void redirect(BuildContext context, List<User> root) {
+    print(root.length);
+    if (root.length == 1) {
+      selectedUser = root[0];
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ScopedModel<ChildEditorViewModel>(
+              model: this, child: ChildAccountEditorPage(viewModel: this)),
+        ),
+      );
+    } else if (root.length > 1) {
+      users = root;
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ScopedModel<ChildEditorViewModel>(
+              model: this, child: EditChildListPage(viewModel: this)),
+        ),
+      );
+    }
   }
 }

@@ -238,7 +238,7 @@ class ApiService implements IApiService {
         .toList();
   }
 
-  Future<User> fetchSearchResult(int accountType, String text) async {
+  Future<List<User>> fetchSearchResult(int accountType, String text) async {
     Map map = {'accountType': accountType, 'text': text};
 
     String url = _remote() + "/accounts/search";
@@ -260,8 +260,14 @@ class ApiService implements IApiService {
 
     if (response.statusCode == 200) {
       final body = json.decode(reply);
-      print(response.statusCode);
-      return new User.fromJson(body);
+      Iterable i = body;
+      List<User> myThing =
+          (jsonDecode(reply) as List).map((e) => new User.fromJson(e)).toList();
+      List<User> users = List<User>();
+      i.forEach((res) {
+        users.add(new User.fromJson(res));
+      });
+      return myThing;
     } else {
       return null;
     }
