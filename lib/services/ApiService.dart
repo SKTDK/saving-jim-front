@@ -255,7 +255,6 @@ class ApiService implements IApiService {
     HttpClientResponse response = await request.close();
 
     String reply = await response.transform(utf8.decoder).join();
-    print(reply);
     httpClient.close();
 
     if (response.statusCode == 200) {

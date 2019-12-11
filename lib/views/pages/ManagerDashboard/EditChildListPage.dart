@@ -13,11 +13,12 @@ class EditChildListPage extends StatefulWidget {
 
 class EditChild extends State<EditChildListPage> {
   var searchController = TextEditingController();
-
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        key: _scaffoldKey,
         body: _buildMenu(),
         appBar: AppBar(
           title: Text('Liste des enfants'),
@@ -75,7 +76,7 @@ class EditChild extends State<EditChildListPage> {
                       if (result != null) {
                         widget.viewModel.redirect(context, result);
                       } else {
-                        _displaySnackBar(context);
+                        _displaySnackBar(context, 'Aucun resultat trouvé');
                       }
                     });
                   },
@@ -117,12 +118,8 @@ class EditChild extends State<EditChildListPage> {
     );
   }
 
-  _displaySnackBar(BuildContext context) {
-    final scaffold = Scaffold.of(context);
-    scaffold.showSnackBar(
-      SnackBar(
-        content: const Text('Nous n\'avons rien trouvé'),
-      ),
-    );
+  _displaySnackBar(BuildContext context, String text) {
+    final snackBar = SnackBar(content: Text(text));
+    _scaffoldKey.currentState.showSnackBar(snackBar);
   }
 }
