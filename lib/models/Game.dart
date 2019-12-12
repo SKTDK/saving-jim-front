@@ -1,35 +1,53 @@
-class Game {
-  // TODO
-  int _id;
-  int _workerId;
-  int _childId;
+import 'package:saving_jim/models/Category.dart';
+import 'package:saving_jim/models/Habit.dart';
 
-  Game(
-    this._id,
-    this._workerId,
-    this._childId,
-  );
+class GameModel {
+  String id;
+  String workerId;
+  String childId;
+  DateTime date;
 
-  Game.fromJson(Map<String, dynamic> json)
-      : this._id = json['id'],
-        this._workerId = json['worker_id'],
-        this._childId = json['child_id'];
+  //will be under 'DATA' in the database
+  Map<String, Category> categoryMap;
+  Map<String, Habit> habitMap;
+  String commentHelpOrNot;
+  String commentSatisfiedOrNot;
+  String commentSummary;
 
-  Map<String, dynamic> toJson() => {
-        'id': this._id,
-        'worker_id': this._workerId,
-        'child_id': this._childId,
-      };
-
-  int get id {
-    return this._id;
+  GameModel() {
+    categoryMap = new Map();
+    habitMap = new Map();
   }
 
-  int get workerId {
-    return this._workerId;
+  GameModel getModel() {
+    return this;
   }
 
-  int get childId {
-    return this._childId;
+  void addCategory(Category category) {
+    categoryMap[category.id.toString()] = category;
+  }
+
+  void addCategories(List<Category> categories) {
+    for (Category elem in categories) {
+      addCategory(elem);
+    }
+  }
+
+  void addHabit(Habit habit) {
+    habitMap[habit.id] = habit;
+  }
+
+  void addHabits(List<Habit> list) {
+    for (Habit elem in list) {
+      addHabit(elem);
+    }
+  }
+
+  List<Category> getCategories() {
+    return categoryMap.values.toList();
+  }
+
+  List<Habit> getHabits() {
+    return habitMap.values.toList();
   }
 }

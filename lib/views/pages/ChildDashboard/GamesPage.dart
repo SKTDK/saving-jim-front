@@ -111,8 +111,8 @@ class _GamesPageState extends State<GamesPage> {
                                         selectedAccountType = value;
                                         // callback on the function
 
-                                        widget.viewModel.displayList(
-                                            context, selectedAccountType);
+                                        // widget.viewModel.displayList(
+                                        //     context, selectedAccountType);
                                       });
                                     },
                                     value:

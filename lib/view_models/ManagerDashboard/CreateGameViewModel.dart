@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:saving_jim/view_models/Game/GameViewModel.dart';
-import 'package:saving_jim/views/pages/GamePages/CategoriesListPage.dart';
+import 'package:saving_jim/views/pages/GamePages/GameHomePage.dart';
 import 'package:saving_jim/views/pages/ManagerDashboard/CreateGameListPage.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:meta/meta.dart';
@@ -44,7 +44,7 @@ class CreateGameViewModel extends Model {
     Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => CategoriesListPage(viewModel: gameViewModel),
+          builder: (context) => GameHomePage(viewModel: gameViewModel),
         ));
   }
 

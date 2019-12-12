@@ -1,43 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:saving_jim/models/Habit.dart';
 
-class HabitItem extends StatefulWidget {
-  const HabitItem({Key key, this.habit, this.child}) : super(key: key);
+class HabitItemx extends StatefulWidget {
+  const HabitItemx({Key key, this.habit, this.child}) : super(key: key);
 
   final Habit habit;
   final Widget child;
 
-  _HabitItemState createState() => _HabitItemState();
+  _HabitItemxState createState() => _HabitItemxState();
 }
 
-class _HabitItemState extends State<HabitItem> {
+class _HabitItemxState extends State<HabitItemx> {
   int _state = 0;
-  var highlights = [
-    [
-      Colors.blueGrey[800],
-      Colors.blueGrey[700],
-      Colors.blueGrey[600],
-      Colors.blueGrey[400],
-    ],
-    [
-      Colors.green[800],
-      Colors.green[700],
-      Colors.green[600],
-      Colors.green[400],
-    ],
-    [
-      Colors.red[800],
-      Colors.red[700],
-      Colors.red[600],
-      Colors.red[400],
-    ],
-    [
-      Colors.lime[800],
-      Colors.lime[700],
-      Colors.lime[600],
-      Colors.lime[400],
-    ],
-  ];
+  var highlights = [Colors.grey, Colors.green, Colors.red, Colors.lime];
 
   void updateState(int newState) {
     _state = newState;
@@ -52,8 +27,7 @@ class _HabitItemState extends State<HabitItem> {
       width: 300.0,
     );
 
-    final name =
-        Text(widget.habit.name, style: Theme.of(context).textTheme.title);
+    final name = Text(widget.habit.name);
 
     final description = Text(widget.habit.description);
 
@@ -61,18 +35,9 @@ class _HabitItemState extends State<HabitItem> {
       child: Column(
         children: <Widget>[name, description, Expanded(child: image)],
       ),
-      // decoration: BoxDecoration(
-      //     border:
-      //         Border.all(color: highlights[this.widget.habit.state], width: 8)),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.black87, width: 8),
-        gradient: LinearGradient(
-          begin: Alignment.topRight,
-          end: Alignment.bottomLeft,
-          stops: [0.1, 0.5, 0.7, 0.9],
-          colors: highlights[this.widget.habit.state],
-        ),
-      ),
+          border:
+              Border.all(color: highlights[this.widget.habit.state], width: 8)),
     );
 
     return InkWell(
@@ -96,13 +61,12 @@ class _HabitItemState extends State<HabitItem> {
                   width: 300.0,
                 ),
               ),
-              Text("Cette habitude est ... ", textAlign: TextAlign.center),
               FlatButton(
                   onPressed: () => Navigator.of(context).pop(1),
-                  child: Text('Présente')),
+                  child: Text('Présent')),
               FlatButton(
                   onPressed: () => Navigator.of(context).pop(2),
-                  child: Text('Absente')),
+                  child: Text('Absent')),
               FlatButton(
                   onPressed: () => Navigator.of(context).pop(3),
                   child: Text('J\'aimerai')),

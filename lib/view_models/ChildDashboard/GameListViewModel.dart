@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:saving_jim/views/pages/ChildDashboard/GameListPage.dart';
+//import 'package:saving_jim/views/pages/ChildDashboard/GameListPage.dart';
 import 'package:saving_jim/models/Game.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:meta/meta.dart';
@@ -10,14 +10,14 @@ class GameListViewModel extends Model {
   final ApiService apiSvc;
   GameListViewModel({@required this.apiSvc});
 
-  Future<List<Game>> _games;
-  Future<List<Game>> get games => _games;
-  set games(Future<List<Game>> value) {
+  Future<List<GameModel>> _games;
+  Future<List<GameModel>> get games => _games;
+  set games(Future<List<GameModel>> value) {
     _games = value;
     notifyListeners();
   }
 
-  Future<List<Game>> fetchGames(String type) async {
+  Future<List<GameModel>> fetchGames(String type) async {
     int typeInt;
     switch (type) {
       case 'En cours':
@@ -31,13 +31,13 @@ class GameListViewModel extends Model {
     return _games;
   }
 
-  void displayList(BuildContext context, String type) async {
-    await fetchGames(type).then((result) async {
-      await Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => GameListPage(viewModel: this, list: result)),
-      );
-    });
-  }
+  // void displayList(BuildContext context, String type) async {
+  //   await fetchGames(type).then((result) async {
+  //     await Navigator.push(
+  //       context,
+  //       MaterialPageRoute(
+  //           builder: (context) => GameListPage(viewModel: this, list: result)),
+  //     );
+  //   });
+  // }
 }

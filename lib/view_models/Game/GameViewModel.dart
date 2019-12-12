@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:saving_jim/models/Category.dart';
 import 'package:saving_jim/models/Habit.dart';
 import 'package:saving_jim/views/pages/GamePages/HabitsListPage.dart';
+import 'package:saving_jim/views/pages/GamePages/SelectHabitsPage.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:meta/meta.dart';
 import 'package:saving_jim/models/User.dart';
@@ -53,7 +54,8 @@ class GameViewModel extends Model {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => HabitsListPage(viewModel: this)));
+            builder: (context) =>
+                SelectHabitsPage(category: selectedCategory)));
   }
 
   List<Habit> fetchHabits(BuildContext context) {

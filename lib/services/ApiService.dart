@@ -178,7 +178,7 @@ class ApiService implements IApiService {
     }
   }
 
-  Future<List<Game>> fetchGames(int typeInt) {
+  Future<List<GameModel>> fetchGames(int typeInt) {
     return null;
   }
 

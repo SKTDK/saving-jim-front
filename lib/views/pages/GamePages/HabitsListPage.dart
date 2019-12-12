@@ -15,21 +15,24 @@ class HabitsList extends State<HabitsListPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Center(
-          child: new GridView.builder(
-            itemCount: widget.viewModel.fetchHabits(context).length,
-            gridDelegate:
-                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-            itemBuilder: (context, index) {
-              return new HabitItem(
-                  habit: widget.viewModel.fetchHabits(context)[index]);
-            },
-          ),
-        ),
         appBar: AppBar(
           title: Text(widget.viewModel.user != null
               ? "Sélection des habitudes: " + widget.viewModel.user.firstname
               : "Sélection des habitudes"),
+        ),
+        body: Container(
+          color: Colors.black,
+          child: Center(
+            child: new GridView.builder(
+              itemCount: widget.viewModel.fetchHabits(context).length,
+              gridDelegate:
+                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+              itemBuilder: (context, index) {
+                return new HabitItem(
+                    habit: widget.viewModel.fetchHabits(context)[index]);
+              },
+            ),
+          ),
         ),
       ),
     );
