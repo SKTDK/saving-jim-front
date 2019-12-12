@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:saving_jim/utils/global.dart' as global;
 import 'package:saving_jim/views/pages/GamePages/GameHomePage.dart';
 import 'package:saving_jim/views/pages/GamePages/LikeOrNotPage.dart';
 import 'package:saving_jim/views/pages/GamePages/NeedHelpOrNot.dart';
 import 'package:saving_jim/views/pages/GamePages/SatisfiedOrNot.dart';
+import 'package:saving_jim/services/GameRepository.dart';
+import 'package:saving_jim/views/widgets/HabitItemSummary.dart';
 
 class SummaryPage extends StatefulWidget {
   SummaryState createState() => SummaryState();
@@ -11,6 +14,33 @@ class SummaryPage extends StatefulWidget {
 
 class SummaryState extends State<SummaryPage> {
   int _selectedIndex = global.appBarIndexSelected;
+  var _selectedHabits;
+  var _selectedCategories;
+
+  Widget _buildLabel(String text, String imgPath){
+    return SizedBox(
+            child: new Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children : <Widget> [
+                SizedBox(
+                  child: Text(text, textAlign: TextAlign.center),
+                  height: 50,
+                ),
+                Image(
+                  image: new AssetImage(imgPath),
+                  height: 50,
+                  color: Colors.white,
+                  colorBlendMode: BlendMode.dstOver,
+                 )
+              ]
+            )
+          );
+  }
+
+   @override
+  void initState() {
+    super.initState();
+  }
 
   void _onItemTapped(int index) {
     var pages = [
@@ -29,34 +59,153 @@ class SummaryState extends State<SummaryPage> {
     });
   }
 
-  Widget body = Container(
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        Expanded(
-            child: Container(
-          child: Column(
-            children: <Widget>[Placeholder(), Placeholder()],
-          ),
-        )),
-        Expanded(
-            child: Container(
-          child: Column(
-            children: <Widget>[Placeholder(), Placeholder()],
-          ),
-        )),
-        Expanded(
-            child: Container(
-          child: Column(
-            children: <Widget>[Placeholder(), Placeholder()],
-          ),
-        ))
-      ],
-    ),
-  );
-
   @override
   Widget build(BuildContext context) {
+
+    _selectedHabits = GameRepository()
+        .getCurrentOpenGame("1")
+        .getHabits()
+        .where((i) => i.state == 1 || i.state == 3)
+        .toList();
+    var _categoriesId = new Set();
+    _selectedHabits.forEach((i) => _categoriesId.add(i.categoryId));
+
+    _selectedCategories = GameRepository()
+        .getCurrentOpenGame("1")
+        .getCategories()
+        .where((i) => _categoriesId.contains(i.id.toString()))
+        .toList();
+
+    var _categoriesString = "";
+    _selectedCategories.forEach((i) => _categoriesString = _categoriesString + i.name + " & ");
+    _categoriesString = _categoriesString.substring(0, _categoriesString.length-3);
+    
+    Widget titlePageWidget = SizedBox(
+      height: 100,
+      child:Row(
+        children: <Widget>[
+          Expanded(
+            child:Text("catégories", textAlign: TextAlign.center),
+          ),
+          Expanded( 
+            child: Text(_categoriesString, textAlign: TextAlign.center,),
+          )
+        ],
+      )
+    );
+
+    Widget listViewLabel = SizedBox( 
+      height:200,
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: Text("N°", 
+              textAlign: TextAlign.center),
+            ),
+          Expanded( 
+            child: Text("habitude", 
+              textAlign: TextAlign.center)
+          ),
+          Expanded(
+            child: Column(
+              children: <Widget>[
+                Text("Valeur", 
+                  textAlign: TextAlign.center),
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      child:SizedBox(
+                      height: 100,
+                      child: _buildLabel("J'aime", 'assets/img/labels/smilingheart.png')
+                      )
+                    ),
+                    Expanded(
+                      child:SizedBox(
+                      height: 100,
+                      child: _buildLabel("J'aime pas", 'assets/img/labels/sadheart.png')
+                      )
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),
+          Expanded(
+            child: Column(
+              children: <Widget>[
+                Text("Aide", 
+                  textAlign: TextAlign.center),
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      child:SizedBox(
+                      height: 100,
+                      child: _buildLabel("Avec Aide", 'assets/img/labels/needhelp.png')
+                      )
+                    ),
+                    Expanded(
+                      child:SizedBox(
+                      height: 100,
+                      child: _buildLabel("Sans aide", 'assets/img/labels/noneedhelp.png')
+                      )
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),
+          Expanded(
+            child: Column( 
+              children: <Widget>[
+                Text("Satisfait", 
+                  textAlign: TextAlign.center),
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      child:SizedBox(
+                      height: 100,
+                      child: _buildLabel("Content", 'assets/img/labels/happyface.png')
+                      )
+                    ),
+                    Expanded(
+                      child:SizedBox(
+                      height: 100,
+                      child: _buildLabel("Pas content", 'assets/img/labels/sadface.png')
+                      )
+                    )
+                  ],
+                )
+              ],
+            )
+          ),
+          Expanded( 
+            child: Text("habitudes prioritaires", 
+            textAlign: TextAlign.center),
+          )
+        ],
+      )
+    );
+
+    Widget listViewWidget = Expanded(
+      child: ListView.builder(
+        itemCount: _selectedHabits.length,
+        itemBuilder: (context, index) {
+          return new HabitItemSummary(habit: _selectedHabits[index], number: index);
+        },
+      )
+    );
+
+    Widget body = Container(
+    color: Colors.black,
+    child: Column(
+      children: <Widget>[
+        titlePageWidget,
+        listViewLabel,
+        listViewWidget
+      ],
+      ),
+    );
+
     return Scaffold(
         appBar: AppBar(
           title: Text("Synthèse"),

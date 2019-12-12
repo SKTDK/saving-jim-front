@@ -48,6 +48,7 @@ class _SelectHabitsState extends State<SelectHabitsPage> {
         actions: <Widget>[
           FlatButton(
             child: Text('Suivant'),
+            textColor: Colors.white,
             onPressed: () {
               _onItemTapped(1);
             },

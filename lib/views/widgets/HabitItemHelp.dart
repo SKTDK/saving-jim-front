@@ -52,6 +52,7 @@ class _HabitItemHelpState extends State<HabitItemHelp> {
         builder: (context) {
           return SimpleDialog(
             title: Text(habit.name, textAlign: TextAlign.center),
+            backgroundColor: Colors.black,
             children: <Widget>[
               Container(
                 child: new Image(
@@ -64,10 +65,12 @@ class _HabitItemHelpState extends State<HabitItemHelp> {
                   textAlign: TextAlign.center),
               FlatButton(
                   onPressed: () => Navigator.of(context).pop(true),
-                  child: Text('Oui')),
+                  child: Text('Oui'),
+                  textColor: Colors.white,),
               FlatButton(
                   onPressed: () => Navigator.of(context).pop(false),
-                  child: Text('Non')),
+                  child: Text('Non'),
+                  textColor: Colors.white,),
             ],
           );
         }).then((val) {

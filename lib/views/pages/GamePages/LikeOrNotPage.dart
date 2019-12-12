@@ -96,7 +96,7 @@ class LikeOrNotState extends State<LikeOrNotPage> {
               itemBuilder: (context, index) {
                 return new HabitItemLike(
                     habit: _noActionTaken[index],
-                    parent: this); //crash je sais pas pk
+                    parent: this);
               },
             )));
 
@@ -127,6 +127,7 @@ class LikeOrNotState extends State<LikeOrNotPage> {
         actions: <Widget>[
           FlatButton(
             child: Text('Suivant'),
+            textColor: Colors.white,
             onPressed: () {
               _onItemTapped(2);
             },

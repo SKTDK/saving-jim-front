@@ -131,6 +131,7 @@ class SatisfiedOrNotState extends State<SatisfiedOrNotPage> {
         actions: <Widget>[
           FlatButton(
             child: Text('Suivant'),
+            textColor: Colors.white,
             onPressed: () {
               _onItemTapped(4);
             },

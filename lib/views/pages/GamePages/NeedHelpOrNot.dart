@@ -126,6 +126,7 @@ class NeedHelpOrNotState extends State<NeedHelpOrNotPage> {
         actions: <Widget>[
           FlatButton(
             child: Text('Suivant'),
+            textColor: Colors.white,
             onPressed: () {
               _onItemTapped(3);
             },
