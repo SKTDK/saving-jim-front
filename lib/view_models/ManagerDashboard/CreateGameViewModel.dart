@@ -49,15 +49,9 @@ class CreateGameViewModel extends Model {
   }
 
   void redirect(BuildContext context, List<User> root) {
-    print(root.length);
     if (root.length == 1) {
       selectedUser = root[0];
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => CreateGameListPage(viewModel: this),
-        ),
-      );
+      createGame(selectedUser, context);
     } else if (root.length > 1) {
       users = root;
     }
