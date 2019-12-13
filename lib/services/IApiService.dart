@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'package:saving_jim/models/User.dart';
+import 'package:saving_jim/models/Statistic.dart';
 
 abstract class IApiService {
   // For Mock/Testing purposes
-  Future<User> login(String username, String password);
+  Future<List<Statistic>> fetchStatistics();
 }

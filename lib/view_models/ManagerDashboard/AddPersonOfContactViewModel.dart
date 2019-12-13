@@ -4,13 +4,13 @@ import 'package:meta/meta.dart';
 import 'package:saving_jim/services/ApiService.dart';
 import 'package:saving_jim/utils/constants.dart' as constants;
 
-class AddChildViewModel extends Model {
+class AddPersonOfContactViewModel extends Model {
   final ApiService apiSvc;
-  AddChildViewModel({@required this.apiSvc});
+  AddPersonOfContactViewModel({@required this.apiSvc});
 
   Future<bool> addUser(BuildContext context, String firstname, String lastname,
       String username, String password) async {
-    return apiSvc?.addUser(firstname, lastname, username, password,
-        constants.PERSONOFCONTACT_ACCOUNT_TYPE);
+    return apiSvc?.addUser(
+        firstname, lastname, username, password, constants.CHILD_ACCOUNT_TYPE);
   }
 }

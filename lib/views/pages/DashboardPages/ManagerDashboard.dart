@@ -3,6 +3,7 @@ import 'package:saving_jim/utils/ThemedApp.dart';
 import 'package:saving_jim/view_models/Dashboards/ManagerDashboardViewModel.dart';
 import 'package:saving_jim/views/pages/Login/LoginPage.dart';
 import 'package:saving_jim/views/pages/ManagerDashboard/AddChildPage.dart';
+import 'package:saving_jim/views/pages/ManagerDashboard/AddPersonOfContactPage.dart';
 
 class ManagerDashboard extends StatefulWidget {
   final ManagerDashboardViewModel viewModel;
@@ -82,6 +83,37 @@ class _ManagerDashboardState extends State<ManagerDashboard> {
                 ),
                 child: ListTile(
                   onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AddPersonOfContactPage(
+                                viewModel: addPersonOfContactViewModel)));
+                  },
+                  title: Center(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 100,
+                      child: Center(
+                        child: Text(
+                          'Ajouter Personne de Contact',
+                          style: Theme.of(context).textTheme.title,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    stops: [0.1, 0.5, 0.7, 0.9],
+                    colors: ThemedApp.secondaryGradient,
+                  ),
+                ),
+                child: ListTile(
+                  onTap: () {
                     editChildViewModel.fetchChildren(context);
                   },
                   title: Center(
@@ -104,7 +136,7 @@ class _ManagerDashboardState extends State<ManagerDashboard> {
                     begin: Alignment.topRight,
                     end: Alignment.bottomLeft,
                     stops: [0.1, 0.5, 0.7, 0.9],
-                    colors: ThemedApp.secondaryGradient,
+                    colors: ThemedApp.primaryGradient,
                   ),
                 ),
                 child: ListTile(
@@ -131,7 +163,7 @@ class _ManagerDashboardState extends State<ManagerDashboard> {
                     begin: Alignment.topRight,
                     end: Alignment.bottomLeft,
                     stops: [0.1, 0.5, 0.7, 0.9],
-                    colors: ThemedApp.primaryGradient,
+                    colors: ThemedApp.secondaryGradient,
                   ),
                 ),
                 child: ListTile(

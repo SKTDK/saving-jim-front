@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:saving_jim/view_models/LoginPageViewModel.dart';
 import 'package:saving_jim/view_models/ManagerDashboard/AddChildViewModel.dart';
+import 'package:saving_jim/view_models/ManagerDashboard/AddPersonOfContactViewModel.dart';
 import 'package:saving_jim/view_models/ManagerDashboard/CreateGameViewModel.dart';
 import 'package:saving_jim/view_models/ManagerDashboard/ChildEditorViewModel.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -10,8 +11,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 final LoginPageViewModel loginPageViewModel =
     LoginPageViewModel(apiSvc: ApiService());
+
 final AddChildViewModel addChildViewModel =
     AddChildViewModel(apiSvc: ApiService());
+
+final AddPersonOfContactViewModel addPersonOfContactViewModel =
+    AddPersonOfContactViewModel(apiSvc: ApiService());
 
 final ChildEditorViewModel editChildViewModel =
     ChildEditorViewModel(apiSvc: ApiService());
