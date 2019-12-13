@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:saving_jim/view_models/ChildDashboard/GameListViewModel.dart';
+import 'package:saving_jim/view_models/ChildDashboard/PersonOfContactListViewModel.dart';
 import 'package:saving_jim/view_models/LoginPageViewModel.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:meta/meta.dart';
@@ -11,6 +12,9 @@ final LoginPageViewModel loginPageViewModel =
 
 final GameListViewModel gameListViewModel =
     GameListViewModel(apiSvc: ApiService());
+
+final PersonOfContactListViewModel personOfContactListViewModel =
+    PersonOfContactListViewModel(apiSvc: ApiService());
 
 class ChildDashboardViewModel extends Model {
   final ApiService apiSvc;

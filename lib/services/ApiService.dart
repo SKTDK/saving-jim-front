@@ -271,4 +271,72 @@ class ApiService implements IApiService {
       return null;
     }
   }
+
+  fetchUsersByUsers(int accountType) async {
+    Map map = {'accountType': accountType};
+
+    String url = _remote() + "/accounts/searchByUser";
+
+    HttpClient httpClient = new HttpClient();
+    HttpClientRequest request = await httpClient.postUrl(Uri.parse(url));
+    request.headers.set('content-type', 'application/json; charset=utf-8');
+    // auth with jwt token
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    request.headers.set('authorization', sharedPreferences.get('token'));
+
+    request.add(utf8.encode(jsonEncode(map)));
+
+    HttpClientResponse response = await request.close();
+
+    String reply = await response.transform(utf8.decoder).join();
+    httpClient.close();
+
+    if (response.statusCode == 200) {
+      final body = json.decode(reply);
+      Iterable i = body;
+      List<User> myThing =
+          (jsonDecode(reply) as List).map((e) => new User.fromJson(e)).toList();
+      List<User> users = List<User>();
+      i.forEach((res) {
+        users.add(new User.fromJson(res));
+      });
+      return myThing;
+    } else {
+      return null;
+    }
+  }
+
+  fetchUsersByPersonOfContact(int accountType) async {
+    Map map = {'accountType': accountType};
+
+    String url = _remote() + "/accounts/searchByPersonOfContact";
+
+    HttpClient httpClient = new HttpClient();
+    HttpClientRequest request = await httpClient.postUrl(Uri.parse(url));
+    request.headers.set('content-type', 'application/json; charset=utf-8');
+    // auth with jwt token
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    request.headers.set('authorization', sharedPreferences.get('token'));
+
+    request.add(utf8.encode(jsonEncode(map)));
+
+    HttpClientResponse response = await request.close();
+
+    String reply = await response.transform(utf8.decoder).join();
+    httpClient.close();
+
+    if (response.statusCode == 200) {
+      final body = json.decode(reply);
+      Iterable i = body;
+      List<User> myThing =
+          (jsonDecode(reply) as List).map((e) => new User.fromJson(e)).toList();
+      List<User> users = List<User>();
+      i.forEach((res) {
+        users.add(new User.fromJson(res));
+      });
+      return myThing;
+    } else {
+      return null;
+    }
+  }
 }

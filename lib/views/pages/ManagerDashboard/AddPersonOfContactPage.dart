@@ -21,6 +21,7 @@ class _AddPersonOfContactPageState extends State<AddPersonOfContactPage>
   var passwordController = TextEditingController();
   var emailController = TextEditingController();
   var phoneController = TextEditingController();
+  var childUsernameController = TextEditingController();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -31,6 +32,7 @@ class _AddPersonOfContactPageState extends State<AddPersonOfContactPage>
     passwordController.dispose();
     emailController.dispose();
     phoneController.dispose();
+    childUsernameController.dispose();
     super.dispose();
   }
 
@@ -135,6 +137,27 @@ class _AddPersonOfContactPageState extends State<AddPersonOfContactPage>
                   style: new TextStyle(color: Colors.white),
                   textAlign: TextAlign.center,
                   controller: passwordController,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    hintText: "...",
+                    hintStyle: TextStyle(color: Colors.white),
+                    enabledBorder: new UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white, width: 1.0),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.blueAccent),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: ScreenUtil.getInstance().setHeight(30),
+                ),
+                Text("Nom de compte enfant",
+                    style: Theme.of(context).textTheme.body1),
+                TextField(
+                  style: new TextStyle(color: Colors.white),
+                  textAlign: TextAlign.center,
+                  controller: childUsernameController,
                   obscureText: true,
                   decoration: InputDecoration(
                     hintText: "...",

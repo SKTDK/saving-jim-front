@@ -100,16 +100,32 @@ class SummaryState extends State<SummaryPage> {
         child: Row(
           children: <Widget>[
             Expanded(
-              child: Text("N°", textAlign: TextAlign.center),
+              child: Text("N°",
+                  textAlign: TextAlign.center,
+                  style:
+                      MediaQuery.of(context).orientation == Orientation.portrait
+                          ? Theme.of(context).textTheme.display2
+                          : Theme.of(context).textTheme.body2),
             ),
-            Expanded(child: Text("habitude", textAlign: TextAlign.center)),
+            Expanded(
+                child: Text("habitude",
+                    textAlign: TextAlign.center,
+                    style: MediaQuery.of(context).orientation ==
+                            Orientation.portrait
+                        ? Theme.of(context).textTheme.display2
+                        : Theme.of(context).textTheme.body2)),
             Expanded(
               child: Column(
                 children: <Widget>[
                   SizedBox(
                     height: 50,
                   ),
-                  Text("Valeur", textAlign: TextAlign.center),
+                  Text("Valeur",
+                      textAlign: TextAlign.center,
+                      style: MediaQuery.of(context).orientation ==
+                              Orientation.portrait
+                          ? Theme.of(context).textTheme.display2
+                          : Theme.of(context).textTheme.body2),
                   SizedBox(
                     height: 30,
                   ),
@@ -136,7 +152,12 @@ class SummaryState extends State<SummaryPage> {
                   SizedBox(
                     height: 50,
                   ),
-                  Text("Aide", textAlign: TextAlign.center),
+                  Text("Aide",
+                      textAlign: TextAlign.center,
+                      style: MediaQuery.of(context).orientation ==
+                              Orientation.portrait
+                          ? Theme.of(context).textTheme.display2
+                          : Theme.of(context).textTheme.body2),
                   SizedBox(
                     height: 30,
                   ),
@@ -163,7 +184,12 @@ class SummaryState extends State<SummaryPage> {
                 SizedBox(
                   height: 50,
                 ),
-                Text("Satisfait", textAlign: TextAlign.center),
+                Text("Satisfait",
+                    textAlign: TextAlign.center,
+                    style: MediaQuery.of(context).orientation ==
+                            Orientation.portrait
+                        ? Theme.of(context).textTheme.display2
+                        : Theme.of(context).textTheme.body2),
                 SizedBox(
                   height: 30,
                 ),
@@ -184,8 +210,15 @@ class SummaryState extends State<SummaryPage> {
               ],
             )),
             Expanded(
-              child:
-                  Text("habitudes prioritaires", textAlign: TextAlign.center),
+              child: Text(
+                  MediaQuery.of(context).orientation == Orientation.portrait
+                      ? 'Prioritaire'
+                      : 'Habitudes prioritaires',
+                  textAlign: TextAlign.center,
+                  style:
+                      MediaQuery.of(context).orientation == Orientation.portrait
+                          ? Theme.of(context).textTheme.display2
+                          : Theme.of(context).textTheme.body2),
             )
           ],
         ));

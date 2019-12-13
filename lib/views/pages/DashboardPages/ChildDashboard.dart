@@ -40,7 +40,6 @@ class _ChildDashboardState extends State<ChildDashboard> {
                   ),
                 ),
               ),
-              Divider(color: Theme.of(context).primaryColor, height: 0),
               Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -72,7 +71,6 @@ class _ChildDashboardState extends State<ChildDashboard> {
                   ),
                 ),
               ),
-              Divider(color: Colors.black, height: 0),
               Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -80,6 +78,33 @@ class _ChildDashboardState extends State<ChildDashboard> {
                     end: Alignment.bottomLeft,
                     stops: [0.1, 0.5, 0.7, 0.9],
                     colors: ThemedApp.secondaryGradientChild,
+                  ),
+                ),
+                child: ListTile(
+                  onTap: () {
+                    personOfContactListViewModel.fetchPersonOfContact(context);
+                  },
+                  title: Center(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 100,
+                      child: Center(
+                        child: Text(
+                          'Afficher mes contacts',
+                          style: Theme.of(context).textTheme.title,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    stops: [0.1, 0.5, 0.7, 0.9],
+                    colors: ThemedApp.primaryGradientChild,
                   ),
                 ),
                 child: ListTile(
