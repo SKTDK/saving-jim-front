@@ -290,7 +290,7 @@ class ApiService implements IApiService {
 
     String reply = await response.transform(utf8.decoder).join();
     httpClient.close();
-
+    print(reply);
     if (response.statusCode == 200) {
       final body = json.decode(reply);
       Iterable i = body;

@@ -10,7 +10,7 @@ class AddPersonOfContactViewModel extends Model {
 
   Future<bool> addUser(BuildContext context, String firstname, String lastname,
       String username, String password) async {
-    return apiSvc?.addUser(
-        firstname, lastname, username, password, constants.CHILD_ACCOUNT_TYPE);
+    return apiSvc?.addUser(firstname, lastname, username, password,
+        constants.PERSONOFCONTACT_ACCOUNT_TYPE);
   }
 }

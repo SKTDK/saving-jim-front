@@ -16,9 +16,7 @@ class PersonOfContactListViewModel extends Model {
   List<User> users;
 
   void fetchPersonOfContact(BuildContext context) async {
-    apiSvc
-        .fetchUsersByUsers(constants.PERSONOFCONTACT_ACCOUNT_TYPE)
-        .then((result) {
+    apiSvc.fetchUsersByUsers(constants.CHILD_ACCOUNT_TYPE).then((result) {
       users = result;
       Navigator.push(
           context,
